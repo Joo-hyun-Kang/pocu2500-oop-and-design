@@ -32,14 +32,14 @@ public class ComplexNumber {
 
     public ComplexNumber add(final ComplexNumber num) {
         final double real = this.real + num.real;
-        final double imaginary = this.imaginary + num.imaginary ;
+        final double imaginary = this.imaginary + num.imaginary;
 
         return new ComplexNumber(real, imaginary);
     }
 
     public ComplexNumber subtract(final ComplexNumber num) {
         final double real = this.real - num.real;
-        final double imaginary = this.imaginary - num.imaginary ;
+        final double imaginary = this.imaginary - num.imaginary;
 
         return new ComplexNumber(real, imaginary);
     }
@@ -60,14 +60,8 @@ public class ComplexNumber {
         (a + bi) / (c + di) = [(a + bi) / (c + di)] * [(c - di) / (c - di)]
                     = (a + bi)(c - di) / (c^2 + d^2)
          */
-
         ComplexNumber numberator = this.multiply(num.getConjugate());
-
         double denominator = (num.real * num.real) + (num.imaginary * num.imaginary);
-
-        if (denominator == 0) {
-            return null;
-        }
 
         return new ComplexNumber(numberator.real / denominator, numberator.imaginary / denominator);
     }
