@@ -1,33 +1,47 @@
 package academy.pocu.comp2500.assignment1;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Blog {
-    private int blogId;
-    private int count;
+    private UUID id;
+    private String name;
+    private Author owner;
     private ArrayList<Post> posts;
 
-    Blog(int blogId) {
-        this.blogId = blogId;
+    Blog(UUID id, String name, Author author) {
+        this.id = id;
+        this.name = name;
+        this.owner = author;
+        this.posts = new ArrayList<>();
     }
 
-    public void createPost(String content, ArrayList<String> tags) {
-        Post newPost = new Post(count++, content, tags);
-        posts.add(newPost);
+    public void addPost(Author author, Post post) {
+        assert(author.getId() == post.getAuthor().getId());
+        this.posts.add(post);
     }
 
-    public ArrayList<Post> getPostsAllOrNull() {
+    public void updateTitle(Author author, Post post, String content) {
+        assert(author.getId() == post.getAuthor().getId());
+        post.setTitle(content);
+    }
+
+    public void removePost(Post post) {
+        this.posts.remove(post);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public ArrayList<Post> getPostAll() {
         return posts;
     }
 
-    public ArrayList<Post> getPostTagOrNull(String tag) {
-        ArrayList<Post> sortedPost = new ArrayList<>();
-        for (Post post : posts) {
-            if (post.findTag(tag) == true) {
-                sortedPost.add(post);
-            }
-        }
-
-        return sortedPost.size() > 0 ? sortedPost : null;
+    public Post getPost(Post post) {
+        int idx = posts.indexOf(post);
+        assert(idx != -1);
+        return posts.get(idx);
     }
 }

@@ -1,42 +1,87 @@
 package academy.pocu.comp2500.assignment1;
 
-import javax.lang.model.type.ArrayType;
-import java.lang.annotation.Target;
+import java.lang.reflect.Array;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Post {
-    private int postId;
+    private static final ZoneOffset TIME_ZONE = ZoneOffset.UTC;
+    private UUID id;
     private OffsetDateTime createAt;
-    private String content;
+    private OffsetDateTime modifiedAt;
+    private Author author;
+    private String title;
+    private String body;
     private ArrayList<String> tags;
 
-    Post(int postId, String content) {
-        this(postId, content, null);
-    }
-    Post(int postId, String content, ArrayList<String> tags) {
-        this.postId = postId;
-        this.createAt = OffsetDateTime.now();
-        this.content = content;
-        this.tags = tags;
+
+    Post(UUID id, String title, Author author) {
+        this(id, title, author, new ArrayList<>());
     }
 
-    public boolean findTag(String tag) {
-        for (String element : tags) {
-            if (element.equals(tag)) {
-                return true;
-            }
-        }
-        return false;
+    Post(UUID id, String title, Author author, ArrayList<String> tags) {
+        this(id, title, "", author, tags);
     }
 
-    public String getContent() {
-        return content;
+    Post(UUID id, String title, String body, Author author, ArrayList<String> tags) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.author = author;
+        this.createAt = OffsetDateTime.now(TIME_ZONE);
+        this.modifiedAt = OffsetDateTime.now(TIME_ZONE);
+        this.tags = tags != null ? tags : new ArrayList<>();
     }
 
-    public OffsetDateTime getCreateAt() { return createAt; }
+    public void setTitle(String title) {
+        this.title = title;
+        this.modifiedAt = OffsetDateTime.now(TIME_ZONE);
+    }
 
-    public void setContent(String content) {
-        this.content = content;
+    public boolean isTagExist(String tag) {
+        return this.tags.contains(tag);
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+        this.modifiedAt = OffsetDateTime.now(TIME_ZONE);
+    }
+
+    public void addTags(String tag) {
+        this.tags.add(tag);
+    }
+
+    public void removeTags(String tag) {
+        this.tags.remove(tag);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public OffsetDateTime getCreateAt() {
+        return createAt;
+    }
+
+    public OffsetDateTime getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public ArrayList<String> getTags() {
+        return tags;
     }
 }
