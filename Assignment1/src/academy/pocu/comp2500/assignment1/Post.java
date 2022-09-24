@@ -108,7 +108,7 @@ public class Post {
     }
 
     public ArrayList<Comment> getComments() {
-        comments.sort((comment1, comment2) -> comment1.compareTo(comment2));
+        comments.sort((comment1, comment2) -> comment1.getNetvote() - comment2.getNetvote());
         return comments;
     }
 

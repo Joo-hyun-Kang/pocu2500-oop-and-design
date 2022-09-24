@@ -4,7 +4,7 @@ import javax.swing.text.LayeredHighlighter;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Comment implements Comparable<Comment> {
+public class Comment {
     private UUID commentId;
     private Author author;
     private String content;
@@ -62,7 +62,7 @@ public class Comment implements Comparable<Comment> {
     }
 
     public ArrayList<Comment> getSubcomment() {
-        subcomment.sort((comment1, comment2) -> comment1.compareTo(comment2));
+        subcomment.sort((comment1, comment2) -> comment1.getNetvote() - comment2.getNetvote());
         return subcomment;
     }
 
@@ -76,10 +76,5 @@ public class Comment implements Comparable<Comment> {
 
     public int getNetvote() {
         return this.upvote - this.downvote;
-    }
-
-    @Override
-    public int compareTo(Comment other) {
-        return this.getNetvote() - other.getNetvote();
     }
 }

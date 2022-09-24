@@ -1,6 +1,5 @@
 package academy.pocu.comp2500.assignment1;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -92,7 +91,7 @@ public class Blog {
 
     public ArrayList<Post> getPostsByTagOrNull(String tag) {
         ArrayList<Post> sortedPost = new ArrayList<>();
-        for (Post post: posts) {
+        for (Post post : posts) {
             if (post.isTagExist(tag) == true) {
                 sortedPost.add(post);
             }
@@ -103,7 +102,7 @@ public class Blog {
 
     public ArrayList<Post> getPostsByAuthorOrNull(Author author) {
         ArrayList<Post> sortedPost = new ArrayList<>();
-        for (Post post: posts) {
+        for (Post post : posts) {
             if (post.getAuthor().getId() == author.getId()) {
                 sortedPost.add(post);
             }
