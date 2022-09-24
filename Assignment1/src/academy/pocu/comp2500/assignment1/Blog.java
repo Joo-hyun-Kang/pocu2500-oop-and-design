@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Blog {
-    private final UUID id;
+    private final UUID blogId;
     private final String name;
     private final Author owner;
     private ArrayList<Post> posts;
     private SortingType sortingType;
 
-    public Blog(UUID id, String name, Author author) {
-        this.id = id;
+    public Blog(UUID blogId, String name, Author author) {
+        this.blogId = blogId;
         this.name = name;
         this.owner = author;
         this.posts = new ArrayList<>();
         this.sortingType = SortingType.CREATED_DES;
     }
 
-    public void addPost(Author author, Post post) {
-        assert (author.getId() == post.getAuthor().getId());
+    public void addPost(Post post) {
+        //assert (author.getId() == post.getAuthor().getId());
         this.posts.add(post);
     }
 
@@ -50,8 +50,8 @@ public class Blog {
         this.sortingType = sortingType;
     }
 
-    public UUID getId() {
-        return this.id;
+    public UUID getBlogId() {
+        return this.blogId;
     }
 
     public String getName() {

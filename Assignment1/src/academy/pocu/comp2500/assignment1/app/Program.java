@@ -13,7 +13,6 @@ public class Program {
         App app = new App(registry);
         registry.validate();
 
-
         Author jokang = new Author(UUID.randomUUID(), "jokang");
 
         Post post1 = new Post(UUID.randomUUID(), "Test1", jokang);
@@ -21,9 +20,9 @@ public class Program {
         Post post3 = new Post(UUID.randomUUID(), "Test3", jokang);
 
         Blog myBlog = new Blog(UUID.randomUUID(), "myBlog", jokang);
-        myBlog.addPost(jokang, post1);
-        myBlog.addPost(jokang, post2);
-        myBlog.addPost(jokang, post3);
+        myBlog.addPost(post1);
+        myBlog.addPost(post2);
+        myBlog.addPost(post3);
 
         System.out.print("hello\n");
 
