@@ -1,15 +1,13 @@
 package academy.pocu.comp2500.assignment1;
 
-import java.lang.reflect.Array;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.UUID;
 
 public class Post {
     private static final ZoneOffset TIME_ZONE = ZoneOffset.UTC;
-    private UUID id;
+    private UUID postId;
     private OffsetDateTime createdAt;
     private OffsetDateTime modifiedAt;
     private Author author;
@@ -19,16 +17,16 @@ public class Post {
     private ArrayList<Comment> comments;
     private ArrayList<Emoji> emojis;
 
-    public Post(UUID id, String title, Author author) {
-        this(id, title, author, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    public Post(UUID postId, String title, Author author) {
+        this(postId, title, author, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
-    public Post(UUID id, String title, Author author, ArrayList<String> tags, ArrayList<Comment> comments, ArrayList<Emoji> emojis) {
-        this(id, title, "", author, tags, comments, emojis);
+    public Post(UUID postId, String title, Author author, ArrayList<String> tags, ArrayList<Comment> comments, ArrayList<Emoji> emojis) {
+        this(postId, title, "", author, tags, comments, emojis);
     }
 
-    public Post(UUID id, String title, String body, Author author, ArrayList<String> tags, ArrayList<Comment> comments, ArrayList<Emoji> emojis) {
-        this.id = id;
+    public Post(UUID postId, String title, String body, Author author, ArrayList<String> tags, ArrayList<Comment> comments, ArrayList<Emoji> emojis) {
+        this.postId = postId;
         this.title = title;
         this.body = body;
         this.author = author;
@@ -66,7 +64,7 @@ public class Post {
     }
 
     public void removeComment(Author author, Comment comment) {
-        assert (author.getId() == comment.getAuthor().getId());
+        assert (author.getAuthorId() == comment.getAuthor().getAuthorId());
         this.comments.remove(comment);
     }
 
@@ -75,12 +73,12 @@ public class Post {
     }
 
     public void removeEmoji(Author author, Emoji emoji) {
-        assert (author.getId() == emoji.getAuthor().getId());
+        assert (author.getAuthorId() == emoji.getAuthor().getAuthorId());
         this.emojis.remove(emoji);
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getPostId() {
+        return postId;
     }
 
     public OffsetDateTime getCreateAt() {

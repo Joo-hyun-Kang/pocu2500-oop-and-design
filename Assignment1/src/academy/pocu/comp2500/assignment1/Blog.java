@@ -5,36 +5,39 @@ import java.util.UUID;
 
 public class Blog {
     private final UUID blogId;
-    private final String name;
-    private final Author owner;
+    private String name;
+    private Author author;
     private ArrayList<Post> posts;
     private SortingType sortingType;
+
+    public Blog(UUID blogId, Author author) {
+        this(blogId, "", author);
+    }
 
     public Blog(UUID blogId, String name, Author author) {
         this.blogId = blogId;
         this.name = name;
-        this.owner = author;
+        this.author = author;
         this.posts = new ArrayList<>();
         this.sortingType = SortingType.CREATED_DES;
     }
 
     public void addPost(Post post) {
-        //assert (author.getId() == post.getAuthor().getId());
         this.posts.add(post);
     }
 
     public void updateTitle(Author author, Post post, String content) {
-        assert (author.getId() == post.getAuthor().getId());
+        assert (author.getAuthorId() == post.getAuthor().getAuthorId());
         post.setTitle(content);
     }
 
     public void updateBody(Author author, Post post, String content) {
-        assert (author.getId() == post.getAuthor().getId());
+        assert (author.getAuthorId() == post.getAuthor().getAuthorId());
         post.setBody(content);
     }
 
     public void updateTag(Author author, Post post, String tag) {
-        assert (author.getId() == post.getAuthor().getId());
+        assert (author.getAuthorId() == post.getAuthor().getAuthorId());
         post.addTags(tag);
     }
 
@@ -50,6 +53,10 @@ public class Blog {
         this.sortingType = sortingType;
     }
 
+    public void setBlogId(String name) {
+        this.name = name;
+    }
+
     public UUID getBlogId() {
         return this.blogId;
     }
@@ -58,8 +65,8 @@ public class Blog {
         return this.name;
     }
 
-    public Author getOwner() {
-        return owner;
+    public Author getAuthor() {
+        return author;
     }
 
     public SortingType getSortingType() {
@@ -103,7 +110,7 @@ public class Blog {
     public ArrayList<Post> getPostsByAuthorOrNull(Author author) {
         ArrayList<Post> sortedPost = new ArrayList<>();
         for (Post post : posts) {
-            if (post.getAuthor().getId() == author.getId()) {
+            if (post.getAuthor().getAuthorId() == author.getAuthorId()) {
                 sortedPost.add(post);
             }
         }

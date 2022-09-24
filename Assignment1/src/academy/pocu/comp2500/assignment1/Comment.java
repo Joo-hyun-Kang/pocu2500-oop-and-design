@@ -20,7 +20,7 @@ public class Comment {
     }
 
     public void setContent(Author author, String content) {
-        assert (this.author.getId() == author.getId());
+        assert (this.author.getAuthorId() == author.getAuthorId());
         this.content = content;
     }
 
@@ -29,7 +29,7 @@ public class Comment {
     }
 
     public void removeSubcommnet(Author author, Comment subcomment) {
-        assert (author.getId() == subcomment.getAuthor().getId());
+        assert (author.getAuthorId() == subcomment.getAuthor().getAuthorId());
         this.subcomment.remove(subcomment);
     }
 
