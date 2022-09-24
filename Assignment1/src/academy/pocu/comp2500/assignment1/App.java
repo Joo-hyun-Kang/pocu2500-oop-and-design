@@ -11,16 +11,16 @@ public class App {
         registry.registerBlogCreator("Blog");
 
                 //registerTagFilterSetter(): 태그 필터를 설정하는 메서드를 등록한다.
-        registry.registerTagFilterSetter("Blog", "getPostByTagOrNull");
+        registry.registerTagFilterSetter("Blog", "getPostsByTagOrNull");
 
                 //registerAuthorFilterSetter(): 작성자 필터를 설정하는 메서드를 등록한다.
         registry.registerAuthorFilterSetter("Blog", "getPostsByAuthorOrNull");
 
                 //registerPostOrderSetter(): 블로그 글의 정렬 방법을 설정하는 메서드를 등록한다.
-        registry.registerPostOrderSetter("Blog", "getSortType");
+        registry.registerPostOrderSetter("Blog", "getSortingType");
 
                 //registerPostListGetter(): 블로그 글 목록을 가져오는 메서드를 등록한다.
-        registry.registerPostListGetter("Blog", "getPostsAllOrNull");
+        registry.registerPostListGetter("Blog", "getPosts");
 
                 //registerPostAdder(): 블로그에 글을 추가하는 메서드를 등록한다.
         registry.registerPostAdder("Blog", "addPost");
@@ -38,13 +38,13 @@ public class App {
         registry.registerCommentAdder("Post", "addComment");
 
                 //registerSubcommentAdder(): 댓글에 하위 댓글을 추가하는 메서드를 등록한다.
-        registry.registerSubcommentAdder("Comment", "setSubcomment");
+        registry.registerSubcommentAdder("Comment", "addSubComment");
 
                 //registerCommentUpdater(): 댓글의 내용을 바꾸는 메서드를 등록한다.
-        registry.registerCommentUpdater("Commnet", "setContent");
+        registry.registerCommentUpdater("Comment", "setContent");
 
                 //registerSubcommentUpdater(): 하위 댓글의 내용을 바꾸는 메서드를 등록한다.
-        registry.registerSubcommentUpdater("Commnet", "setContent");
+        registry.registerSubcommentUpdater("Comment", "setContent");
 
                 //registerReactionAdder(): 블로그 글에 리액션을 추가하는 메서드를 등록한다.
         registry.registerReactionAdder("Post", "addEmoji");
