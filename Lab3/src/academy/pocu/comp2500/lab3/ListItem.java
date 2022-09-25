@@ -10,9 +10,13 @@ public class ListItem {
     private char bulletStyle;
 
     public ListItem(String text) {
+        this(text, '*');
+    }
+
+    public ListItem(String text, char bulletStyle) {
         this.text = text;
         this.sublistItems = new ArrayList<>();
-        this.bulletStyle = '*';
+        this.bulletStyle = bulletStyle;
     }
 
     public String getText() {
@@ -27,8 +31,16 @@ public class ListItem {
         return bulletStyle;
     }
 
+    public void setBulletStyle(char bulletStyle) {
+        this.bulletStyle = bulletStyle;
+    }
+
     public void addSublistItem(ListItem sublistItem) {
         this.sublistItems.add(sublistItem);
+    }
+
+    public void removeSublistItem(int index) {
+        this.sublistItems.remove(index);
     }
 
     public int getSublistItem(ListItem sublistItem) {
@@ -39,12 +51,12 @@ public class ListItem {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%c %s%s", this.bulletStyle, this.text, System.lineSeparator()));
 
-        getStringRecursive(this.sublistItems, 1, sb);
+        strinifySublistRecursive(this.sublistItems, 1, sb);
 
         return sb.toString();
     }
 
-    private void getStringRecursive(ArrayList<ListItem> subListItems, int depth, StringBuilder sb) {
+    private void strinifySublistRecursive(ArrayList<ListItem> subListItems, int depth, StringBuilder sb) {
         if (subListItems.size() == 0) {
             return ;
         }
@@ -60,7 +72,7 @@ public class ListItem {
         }
 
         for (ListItem sublistItem : subListItems) {
-            getStringRecursive(sublistItem.sublistItems, depth + 1, sb);
+            strinifySublistRecursive(sublistItem.sublistItems, depth + 1, sb);
         }
     }
 }
