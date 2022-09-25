@@ -4,21 +4,19 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Blog {
-    private UUID blogId;
     private Author author;
     private ArrayList<Post> posts;
     private SortingType sortingType;
 
-    public Blog(UUID blogId, Author author) {
-        this(blogId, author, new ArrayList<>());
+    public Blog(Author author) {
+        this(author, new ArrayList<>());
     }
 
-    public Blog(UUID blogId, Author author, ArrayList<Post> posts) {
-        this(blogId, author, posts, SortingType.CREATED_DES);
+    public Blog(Author author, ArrayList<Post> posts) {
+        this(author, posts, SortingType.CREATED_DES);
     }
 
-    public Blog(UUID blogId, Author author, ArrayList<Post> posts, SortingType sortingType) {
-        this.blogId = blogId;
+    public Blog(Author author, ArrayList<Post> posts, SortingType sortingType) {
         this.author = author;
         this.posts = posts == null ? new ArrayList<>() : posts;
         this.sortingType = sortingType;
@@ -55,10 +53,6 @@ public class Blog {
         this.sortingType = sortingType;
     }
 
-    public UUID getBlogId() {
-        return this.blogId;
-    }
-
     public Author getAuthor() {
         return author;
     }
@@ -68,7 +62,6 @@ public class Blog {
     }
 
     public ArrayList<Post> getPosts() {
-        ArrayList<Post> result = null;
         switch (this.sortingType) {
             case CREATED_DES:
                 posts.sort((post1, post2) -> post1.getCreateAt().compareTo(post2.getCreateAt()));
@@ -114,5 +107,4 @@ public class Blog {
 
         return sortedPost.size() > 0 ? sortedPost : null;
     }
-
 }

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Post {
-    private static final ZoneOffset TIME_ZONE = ZoneOffset.UTC;
     private UUID postId;
     private OffsetDateTime createdAt;
     private OffsetDateTime modifiedAt;
@@ -23,28 +22,39 @@ public class Post {
 
     public Post(UUID postId, String title, String body, Author author, ArrayList<String> tags, ArrayList<Comment> comments, ArrayList<Emoji> emojis) {
         this.postId = postId;
-        this.title = title;
-        this.body = body;
+        this.title = title == null ? "" : title;
+        this.body = body == null ? "" : body;
         this.author = author;
-        this.createdAt = OffsetDateTime.now(TIME_ZONE);
-        this.modifiedAt = OffsetDateTime.now(TIME_ZONE);
+        this.createdAt = OffsetDateTime.now(ZoneOffset.UTC);
+        this.modifiedAt = OffsetDateTime.now(ZoneOffset.UTC);
         this.tags = tags == null ? new ArrayList<>() : tags;
         this.comments = comments == null ? new ArrayList<>() : comments;
         this.emojis = emojis == null ? new ArrayList<>() : emojis;
     }
 
-    public void setTitle(String title) {
+    public boolean setTitle(String title) {
+        if (title == null) {
+            return false;
+        }
         this.title = title;
-        this.modifiedAt = OffsetDateTime.now(TIME_ZONE);
+        this.modifiedAt = OffsetDateTime.now(ZoneOffset.UTC);
+
+        return true;
     }
 
     public boolean isTagExist(String tag) {
         return this.tags.contains(tag);
     }
 
-    public void setBody(String body) {
+    public boolean setBody(String body) {
+        if (body == null) {
+            return false;
+        }
+
         this.body = body;
-        this.modifiedAt = OffsetDateTime.now(TIME_ZONE);
+        this.modifiedAt = OffsetDateTime.now(ZoneOffset.UTC);
+
+        return true;
     }
 
     public void addTags(String tag) {

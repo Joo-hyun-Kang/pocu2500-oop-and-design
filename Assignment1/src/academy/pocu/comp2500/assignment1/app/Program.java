@@ -24,7 +24,10 @@ public class Program {
         posts.add(post2);
         posts.add(post3);
 
-        Blog blog = new Blog(UUID.randomUUID(), jokang, posts);
+        System.out.println(post1.getCreateAt());
+        System.out.println(post1.getCreateAt());
+
+        Blog blog = new Blog(jokang, posts);
         blog.setSortingType(SortingType.TITLE_AEC);
         posts = blog.getPosts();
         posts.forEach(post -> {System.out.print(post.getTitle() + '\n'); });
