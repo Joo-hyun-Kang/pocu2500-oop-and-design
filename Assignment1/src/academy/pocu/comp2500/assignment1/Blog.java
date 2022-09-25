@@ -11,14 +11,14 @@ public class Blog {
     private SortingType sortingType;
 
     public Blog(UUID blogId, Author author) {
-        this(blogId, "", author);
+        this(blogId, "", author, new ArrayList<>());
     }
 
-    public Blog(UUID blogId, String name, Author author) {
+    public Blog(UUID blogId, String name, Author author, ArrayList<Post> posts) {
         this.blogId = blogId;
         this.name = name;
         this.author = author;
-        this.posts = new ArrayList<>();
+        this.posts = posts;
         this.sortingType = SortingType.CREATED_DES;
     }
 

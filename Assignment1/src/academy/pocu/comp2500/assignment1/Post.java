@@ -17,12 +17,8 @@ public class Post {
     private ArrayList<Comment> comments;
     private ArrayList<Emoji> emojis;
 
-    public Post(UUID postId, String title, Author author) {
-        this(postId, title, author, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-    }
-
-    public Post(UUID postId, String title, Author author, ArrayList<String> tags, ArrayList<Comment> comments, ArrayList<Emoji> emojis) {
-        this(postId, title, "", author, tags, comments, emojis);
+    public Post(UUID postId, String title, String body, Author author) {
+        this(postId, title, body, author, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
     public Post(UUID postId, String title, String body, Author author, ArrayList<String> tags, ArrayList<Comment> comments, ArrayList<Emoji> emojis) {
@@ -32,7 +28,7 @@ public class Post {
         this.author = author;
         this.createdAt = OffsetDateTime.now(TIME_ZONE);
         this.modifiedAt = OffsetDateTime.now(TIME_ZONE);
-        this.tags = tags != null ? tags : new ArrayList<>();
+        this.tags = tags;
         this.comments = comments;
         this.emojis = emojis;
     }
