@@ -9,11 +9,19 @@ public class Blog {
     private ArrayList<Post> posts;
     private SortingType sortingType;
 
+    public Blog(UUID blogId, Author author) {
+        this(blogId, author, new ArrayList<>());
+    }
+
     public Blog(UUID blogId, Author author, ArrayList<Post> posts) {
+        this(blogId, author, posts, SortingType.CREATED_DES);
+    }
+
+    public Blog(UUID blogId, Author author, ArrayList<Post> posts, SortingType sortingType) {
         this.blogId = blogId;
         this.author = author;
         this.posts = posts == null ? new ArrayList<>() : posts;
-        this.sortingType = SortingType.CREATED_DES;
+        this.sortingType = sortingType;
     }
 
     public void addPost(Post post) {
