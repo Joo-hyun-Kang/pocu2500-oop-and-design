@@ -69,9 +69,6 @@ public class ListItem {
 
         for (ListItem sublistItem : subListItems) {
             sb.append(String.format("%s%c %s%s", indentToString, sublistItem.getBulletStyle(), sublistItem.getText(), System.lineSeparator()));
-        }
-
-        for (ListItem sublistItem : subListItems) {
             strinifySublistRecursive(sublistItem.sublistItems, depth + 1, sb);
         }
     }
