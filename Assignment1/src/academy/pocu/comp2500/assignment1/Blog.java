@@ -12,7 +12,7 @@ public class Blog {
     public Blog(UUID blogId, Author author, ArrayList<Post> posts) {
         this.blogId = blogId;
         this.author = author;
-        this.posts = posts;
+        this.posts = posts == null ? new ArrayList<>() : posts;
         this.sortingType = SortingType.CREATED_DES;
     }
 
