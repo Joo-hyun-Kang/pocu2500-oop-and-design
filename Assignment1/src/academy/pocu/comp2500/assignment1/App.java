@@ -6,9 +6,9 @@ public class App {
     public App(Registry registry) {
         registry.registerBlogCreator("Blog");
 
-        registry.registerTagFilterSetter("Blog", "getPostsByTagOrNull");
+        registry.registerTagFilterSetter("Blog", "setTagFilter");
 
-        registry.registerAuthorFilterSetter("Blog", "getPostsByAuthorOrNull");
+        registry.registerAuthorFilterSetter("Blog", "setAuthorFilter");
 
         registry.registerPostOrderSetter("Blog", "getSortingType");
 
