@@ -19,9 +19,12 @@ public class Comment {
         this.subcomment = new ArrayList<>();
     }
 
-    public void setContent(Author author, String content) {
-        assert (this.author.getAuthorId() == author.getAuthorId());
+    public boolean setContent(Author author, String content) {
+        if (this.author.getAuthorId() != author.getAuthorId()) {
+            return false;
+        }
         this.content = content;
+        return true;
     }
 
     public void addSubComment(Comment subcomment) {

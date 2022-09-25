@@ -2,6 +2,7 @@ package academy.pocu.comp2500.assignment1;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Blog {
     private Author author;
@@ -24,19 +25,28 @@ public class Blog {
         this.posts.add(post);
     }
 
-    public void updateTitle(Author author, Post post, String content) {
-        assert (author.getAuthorId() == post.getAuthor().getAuthorId());
+    public boolean updateTitle(UUID authorId, Post post, String content) {
+        if (authorId != post.getAuthor().getAuthorId()) {
+            return false;
+        }
         post.setTitle(content);
+        return true;
     }
 
-    public void updateBody(Author author, Post post, String content) {
-        assert (author.getAuthorId() == post.getAuthor().getAuthorId());
+    public boolean updateBody(UUID authorId, Post post, String content) {
+        if (authorId != post.getAuthor().getAuthorId()) {
+            return false;
+        }
         post.setBody(content);
+        return true;
     }
 
-    public void updateTag(Author author, Post post, String tag) {
-        assert (author.getAuthorId() == post.getAuthor().getAuthorId());
+    public boolean updateTag(UUID authorId, Post post, String tag) {
+        if (authorId != post.getAuthor().getAuthorId()) {
+            return false;
+        }
         post.addTags(tag);
+        return true;
     }
 
     public void setSortingType(SortingType sortingType) {
