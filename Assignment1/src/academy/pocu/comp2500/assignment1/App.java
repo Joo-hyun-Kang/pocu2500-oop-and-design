@@ -26,7 +26,7 @@ public class App {
 
         registry.registerSubcommentAdder("Comment", "addSubComment");
 
-        registry.registerCommentUpdater("Comment", "setContent");
+        registry.registerCommentUpdater("Post", "updateCommet");
 
         registry.registerSubcommentUpdater("Comment", "setContent");
 
