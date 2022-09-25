@@ -32,29 +32,22 @@ public class Post {
         this.emojis = new ArrayList<>();
     }
 
-    public boolean setTitle(String title) {
-        if (title == null) {
-            return false;
+    public void setTitle(Author author, String title) {
+        if (author.getAuthorId() == this.author.getAuthorId()) {
+            this.title = title;
+            this.modifiedAt = OffsetDateTime.now(ZoneOffset.UTC);
         }
-        this.title = title;
-        this.modifiedAt = OffsetDateTime.now(ZoneOffset.UTC);
+    }
 
-        return true;
+    public void setBody(Author author, String body) {
+        if (author.getAuthorId() == this.author.getAuthorId()) {
+            this.body = body;
+            this.modifiedAt = OffsetDateTime.now(ZoneOffset.UTC);
+        }
     }
 
     public boolean isTagExist(String tag) {
         return this.tags.contains(tag);
-    }
-
-    public boolean setBody(String body) {
-        if (body == null) {
-            return false;
-        }
-
-        this.body = body;
-        this.modifiedAt = OffsetDateTime.now(ZoneOffset.UTC);
-
-        return true;
     }
 
     public void addTags(String tag) {
@@ -74,15 +67,15 @@ public class Post {
         this.comments.remove(comment);
     }
 
-    public void updateCommet(UUID authorId, String content) {
-        ArrayList<Comment> targetPosts = findCommentOrNull(authorId);
-
-        if (targetPosts != null) {
-            for (Comment post : targetPosts) {
-                post.setContent(content);
-            }
-        }
-    }
+//    public void updateCommet(UUID authorId, String content) {
+//        ArrayList<Comment> targetPosts = findCommentOrNull(authorId);
+//
+//        if (targetPosts != null) {
+//            for (Comment post : targetPosts) {
+//                post.setContent(content);
+//            }
+//        }
+//    }
 
     public void addEmoji(Emoji emoji) {
         this.emojis.add(emoji);
@@ -130,13 +123,13 @@ public class Post {
         return emojis;
     }
 
-    private ArrayList<Comment> findCommentOrNull(UUID authorId) {
-        ArrayList<Comment> res = new ArrayList<>();
-        for (Comment comment : this.comments) {
-            if (comment.getAuthor().getAuthorId() == authorId) {
-                res.add(comment);
-            }
-        }
-        return res.size() != 0 ? res : null;
-    }
+//    private ArrayList<Comment> findCommentOrNull(UUID authorId) {
+//        ArrayList<Comment> res = new ArrayList<>();
+//        for (Comment comment : this.comments) {
+//            if (comment.getAuthor().getAuthorId() == authorId) {
+//                res.add(comment);
+//            }
+//        }
+//        return res.size() != 0 ? res : null;
+//    }
 }

@@ -23,8 +23,10 @@ public class Comment {
         this.downVoters = new ArrayList<>();
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setContent(Author author, String content) {
+        if (author.getAuthorId() == this.author.getAuthorId()) {
+            this.content = content;
+        }
     }
 
     public void addSubComment(Comment subcomment) {

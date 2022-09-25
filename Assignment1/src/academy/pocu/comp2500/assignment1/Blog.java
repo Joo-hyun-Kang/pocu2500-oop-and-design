@@ -25,25 +25,25 @@ public class Blog {
         this.posts.add(post);
     }
 
-    public void updateTitle(UUID authorId, String content) {
-        ArrayList<Post> targetPosts = findPostOrNull(authorId);
-
-        if (targetPosts != null) {
-            for (Post post : targetPosts) {
-                post.setTitle(content);
-            }
-        }
-    }
-
-    public void updateBody(UUID authorId, String content) {
-        ArrayList<Post> targetPosts = findPostOrNull(authorId);
-
-        if (targetPosts != null) {
-            for (Post post : targetPosts) {
-                post.setBody(content);
-            }
-        }
-    }
+//    public void updateTitle(UUID authorId, String content) {
+//        ArrayList<Post> targetPosts = findPostOrNull(authorId);
+//
+//        if (targetPosts != null) {
+//            for (Post post : targetPosts) {
+//                post.setTitle(content);
+//            }
+//        }
+//    }
+//
+//    public void updateBody(UUID authorId, String content) {
+//        ArrayList<Post> targetPosts = findPostOrNull(authorId);
+//
+//        if (targetPosts != null) {
+//            for (Post post : targetPosts) {
+//                post.setBody(content);
+//            }
+//        }
+//    }
 
     public boolean updateTag(UUID authorId, Post post, String tag) {
         if (authorId != post.getAuthor().getAuthorId()) {
@@ -139,13 +139,13 @@ public class Blog {
         this.isAuthorFiltered = true;
     }
 
-    private ArrayList<Post> findPostOrNull(UUID authorId) {
-        ArrayList<Post> res = new ArrayList<>();
-        for (Post post : this.posts) {
-            if (post.getAuthor().getAuthorId() == authorId) {
-                res.add(post);
-            }
-        }
-        return res.size() != 0 ? res : null;
-    }
+//    private ArrayList<Post> findPostOrNull(UUID authorId) {
+//        ArrayList<Post> res = new ArrayList<>();
+//        for (Post post : this.posts) {
+//            if (post.getAuthor().getAuthorId() == authorId) {
+//                res.add(post);
+//            }
+//        }
+//        return res.size() != 0 ? res : null;
+//    }
 }
