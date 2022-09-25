@@ -32,18 +32,24 @@ public class Post {
         this.emojis = new ArrayList<>();
     }
 
-    public void setTitle(Author author, String title) {
+    public boolean updateTitle(Author author, String title) {
         if (author.getAuthorId() == this.author.getAuthorId()) {
             this.title = title;
             this.modifiedAt = OffsetDateTime.now(ZoneOffset.UTC);
+
+            return true;
         }
+        return false;
     }
 
-    public void setBody(Author author, String body) {
+    public boolean updateBody(Author author, String body) {
         if (author.getAuthorId() == this.author.getAuthorId()) {
             this.body = body;
             this.modifiedAt = OffsetDateTime.now(ZoneOffset.UTC);
+
+            return true;
         }
+        return false;
     }
 
     public boolean isTagExist(String tag) {

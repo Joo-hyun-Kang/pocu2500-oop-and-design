@@ -94,7 +94,7 @@ public class Blog {
                 break;
         }
 
-        return new ArrayList<>(res);
+        return new ArrayList<>();
     }
 
     public void setTagFilter(String tag) {
