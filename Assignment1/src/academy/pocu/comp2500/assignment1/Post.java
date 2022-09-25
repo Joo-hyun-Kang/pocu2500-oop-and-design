@@ -17,19 +17,19 @@ public class Post {
     private ArrayList<Emoji> emojis;
 
     public Post(UUID postId, String title, String body, Author author) {
-        this(postId, title, body, author, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        this(postId, title, body, author, new ArrayList<>());
     }
 
-    public Post(UUID postId, String title, String body, Author author, ArrayList<String> tags, ArrayList<Comment> comments, ArrayList<Emoji> emojis) {
+    public Post(UUID postId, String title, String body, Author author, ArrayList<String> tags) {
         this.postId = postId;
-        this.title = title == null ? "" : title;
-        this.body = body == null ? "" : body;
+        this.title = title;
+        this.body = body;
         this.author = author;
         this.createdAt = OffsetDateTime.now(ZoneOffset.UTC);
-        this.modifiedAt = OffsetDateTime.now(ZoneOffset.UTC);
+        this.modifiedAt = this.createdAt;
         this.tags = tags == null ? new ArrayList<>() : tags;
-        this.comments = comments == null ? new ArrayList<>() : comments;
-        this.emojis = emojis == null ? new ArrayList<>() : emojis;
+        this.comments = new ArrayList<>();
+        this.emojis = new ArrayList<>();
     }
 
     public boolean setTitle(String title) {

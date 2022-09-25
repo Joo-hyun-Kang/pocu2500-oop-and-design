@@ -25,17 +25,7 @@ public class Program {
         posts.add(post3);
 
         System.out.println(post1.getCreateAt());
-        System.out.println(post1.getCreateAt());
+        System.out.println(post1.getModifiedAt());
 
-        Blog blog = new Blog(jokang, posts);
-        blog.setSortingType(SortingType.TITLE_AEC);
-        posts = blog.getPosts();
-        posts.forEach(post -> {System.out.print(post.getTitle() + '\n'); });
-
-        Post post4 = new Post(UUID.randomUUID(), "new", "body", jokang);
-        blog.addPost(post4);
-
-        posts = blog.getPosts();
-        posts.forEach(post -> {System.out.print(post.getTitle() + '\n'); });
     }
 }

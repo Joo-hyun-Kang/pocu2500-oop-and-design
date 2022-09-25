@@ -1,7 +1,6 @@
 package academy.pocu.comp2500.assignment1;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Blog {
     private Author author;
@@ -9,17 +8,9 @@ public class Blog {
     private SortingType sortingType;
 
     public Blog(Author author) {
-        this(author, new ArrayList<>());
-    }
-
-    public Blog(Author author, ArrayList<Post> posts) {
-        this(author, posts, SortingType.CREATED_DES);
-    }
-
-    public Blog(Author author, ArrayList<Post> posts, SortingType sortingType) {
         this.author = author;
-        this.posts = posts == null ? new ArrayList<>() : posts;
-        this.sortingType = sortingType;
+        this.posts = new ArrayList<>();
+        this.sortingType = SortingType.CREATED_DES;
     }
 
     public void addPost(Post post) {
@@ -39,14 +30,6 @@ public class Blog {
     public void updateTag(Author author, Post post, String tag) {
         assert (author.getAuthorId() == post.getAuthor().getAuthorId());
         post.addTags(tag);
-    }
-
-    public void removePost(Post post) {
-        this.posts.remove(post);
-    }
-
-    public void removeTag(Post post, String tag) {
-        post.removeTags(tag);
     }
 
     public void setSortingType(SortingType sortingType) {
