@@ -34,9 +34,9 @@ public class App {
 
         registry.registerReactionRemover("Post", "removeEmoji");
 
-        registry.registerCommentUpvoter("Comment", "plusUpvote");
+        registry.registerCommentUpvoter("Comment", "upvote");
 
-        registry.registerCommentDownvoter("Comment", "plusDownvote");
+        registry.registerCommentDownvoter("Comment", "downvote");
 
         registry.registerCommentListGetter("Post", "getComments");
 
