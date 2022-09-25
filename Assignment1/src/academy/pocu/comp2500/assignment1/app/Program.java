@@ -27,5 +27,9 @@ public class Program {
         System.out.println(post1.getCreateAt());
         System.out.println(post1.getModifiedAt());
 
+        Blog blog = new Blog(null);
+        ArrayList<Post> post = blog.getPosts();
+        System.out.print(post);
+
     }
 }

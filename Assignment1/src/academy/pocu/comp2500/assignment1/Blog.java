@@ -66,7 +66,7 @@ public class Blog {
                 break;
         }
 
-        return posts;
+        return new ArrayList<>(posts);
     }
 
     public ArrayList<Post> getPostsByTagOrNull(String tag) {
