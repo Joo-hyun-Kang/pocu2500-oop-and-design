@@ -43,8 +43,8 @@ public class ListItem {
         this.sublistItems.remove(index);
     }
 
-    public int getSublistItem(ListItem sublistItem) {
-        return this.sublistItems.indexOf(sublistItem);
+    public ListItem getSublistItem(int index) {
+        return this.sublistItems.get(index);
     }
 
     public String toString() {
@@ -58,7 +58,7 @@ public class ListItem {
 
     private void strinifySublistRecursive(ArrayList<ListItem> subListItems, int depth, StringBuilder sb) {
         if (subListItems.size() == 0) {
-            return ;
+            return;
         }
 
         char[] indent = new char[depth * 4];
