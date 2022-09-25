@@ -4,19 +4,13 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Blog {
-    private final UUID blogId;
-    private String name;
+    private UUID blogId;
     private Author author;
     private ArrayList<Post> posts;
     private SortingType sortingType;
 
-    public Blog(UUID blogId, Author author) {
-        this(blogId, "", author, new ArrayList<>());
-    }
-
-    public Blog(UUID blogId, String name, Author author, ArrayList<Post> posts) {
+    public Blog(UUID blogId, Author author, ArrayList<Post> posts) {
         this.blogId = blogId;
-        this.name = name;
         this.author = author;
         this.posts = posts;
         this.sortingType = SortingType.CREATED_DES;
@@ -53,16 +47,8 @@ public class Blog {
         this.sortingType = sortingType;
     }
 
-    public void setBlogId(String name) {
-        this.name = name;
-    }
-
     public UUID getBlogId() {
         return this.blogId;
-    }
-
-    public String getName() {
-        return this.name;
     }
 
     public Author getAuthor() {

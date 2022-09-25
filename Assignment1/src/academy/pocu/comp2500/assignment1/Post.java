@@ -28,7 +28,7 @@ public class Post {
         this.author = author;
         this.createdAt = OffsetDateTime.now(TIME_ZONE);
         this.modifiedAt = OffsetDateTime.now(TIME_ZONE);
-        this.tags = tags;
+        this.tags = tags == null ? new ArrayList<>() : tags;
         this.comments = comments;
         this.emojis = emojis;
     }

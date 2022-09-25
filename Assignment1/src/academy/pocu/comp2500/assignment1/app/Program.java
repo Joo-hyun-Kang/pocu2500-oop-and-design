@@ -15,11 +15,11 @@ public class Program {
 
         Author jokang = new Author(UUID.randomUUID(), "jokang");
 
-        Post post1 = new Post(UUID.randomUUID(), "Test1", jokang);
-        Post post2 = new Post(UUID.randomUUID(), "Test2", jokang);
-        Post post3 = new Post(UUID.randomUUID(), "Test3", jokang);
+        Post post1 = new Post(UUID.randomUUID(), "Test1", "body", jokang);
+        Post post2 = new Post(UUID.randomUUID(), "Test2", "body", jokang);
+        Post post3 = new Post(UUID.randomUUID(), "Test3", "body", jokang);
 
-        Blog myBlog = new Blog(UUID.randomUUID(), "myBlog", jokang);
+        Blog myBlog = new Blog(UUID.randomUUID(), "myblog", jokang, null);
         myBlog.addPost(post1);
         myBlog.addPost(post2);
         myBlog.addPost(post3);
