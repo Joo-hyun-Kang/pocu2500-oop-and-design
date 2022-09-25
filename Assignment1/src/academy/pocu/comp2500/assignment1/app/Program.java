@@ -15,38 +15,24 @@ public class Program {
 
         Author jokang = new Author(UUID.randomUUID(), "jokang");
 
-        Post post1 = new Post(UUID.randomUUID(), "Test1", "body", jokang);
-        Post post2 = new Post(UUID.randomUUID(), "Test2", "body", jokang);
-        Post post3 = new Post(UUID.randomUUID(), "Test3", "body", jokang);
+        Post post3 = new Post(UUID.randomUUID(), "cest3", "body", jokang);
+        Post post2 = new Post(UUID.randomUUID(), "best2", "body", jokang);
+        Post post1 = new Post(UUID.randomUUID(), "aest1", "body", jokang);
 
-        Blog myBlog = new Blog(UUID.randomUUID(), "myblog", jokang, null);
-        myBlog.addPost(post1);
-        myBlog.addPost(post2);
-        myBlog.addPost(post3);
+        ArrayList<Post> posts = new ArrayList<>();
+        posts.add(post1);
+        posts.add(post2);
+        posts.add(post3);
 
-        System.out.print("hello\n");
+        Blog blog = new Blog(UUID.randomUUID(), jokang, posts);
+        blog.setSortingType(SortingType.TITLE_AEC);
+        posts = blog.getPosts();
+        posts.forEach(post -> {System.out.print(post.getTitle() + '\n'); });
 
-        ArrayList<Post> posts = myBlog.getPosts();
-        for (Post post: posts) {
-            System.out.printf("%s %s\n", post.getTitle().toString(), post.getCreateAt().toString());
-        }
+        Post post4 = new Post(UUID.randomUUID(), "new", "body", jokang);
+        blog.addPost(post4);
 
-        myBlog.setSortingType(SortingType.CREATED_AEC);
-        posts = myBlog.getPosts();
-        for (Post post: posts) {
-            System.out.printf("%s %s\n", post.getTitle().toString(), post.getCreateAt().toString());
-        }
-
-        myBlog.setSortingType(SortingType.MODIFIED_DES);
-        posts = myBlog.getPosts();
-        for (Post post: posts) {
-            System.out.printf("%s %s\n", post.getTitle().toString(), post.getCreateAt().toString());
-        }
-
-        myBlog.setSortingType(SortingType.MODIFIED_AEC);
-        posts = myBlog.getPosts();
-        for (Post post: posts) {
-            System.out.printf("%s %s\n", post.getTitle().toString(), post.getCreateAt().toString());
-        }
+        posts = blog.getPosts();
+        posts.forEach(post -> {System.out.print(post.getTitle() + '\n'); });
     }
 }

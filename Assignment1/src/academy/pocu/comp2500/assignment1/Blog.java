@@ -74,6 +74,9 @@ public class Blog {
             case MODIFIED_AEC:
                 posts.sort((post2, post1) -> post2.getModifiedAt().compareTo(post1.getModifiedAt()));
                 break;
+            case TITLE_AEC:
+                posts.sort((post1, post2) -> post1.getTitle().compareTo(post2.getTitle()));
+                break;
             default:
                 assert (false) : "unknown type";
                 break;

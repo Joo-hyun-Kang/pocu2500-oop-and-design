@@ -29,8 +29,8 @@ public class Post {
         this.createdAt = OffsetDateTime.now(TIME_ZONE);
         this.modifiedAt = OffsetDateTime.now(TIME_ZONE);
         this.tags = tags == null ? new ArrayList<>() : tags;
-        this.comments = comments;
-        this.emojis = emojis;
+        this.comments = comments == null ? new ArrayList<>() : comments;
+        this.emojis = emojis == null ? new ArrayList<>() : emojis;
     }
 
     public void setTitle(String title) {
