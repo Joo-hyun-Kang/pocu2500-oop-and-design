@@ -22,12 +22,9 @@ public class Comment {
         this.downVoters = new ArrayList<>();
     }
 
-    public boolean updateContent(Author author, String content) {
-        if (author.getAuthorId() == this.author.getAuthorId()) {
-            this.content = content;
-            return true;
-        }
-        return false;
+    public void updateContent(Author author, String content) {
+        assert (author.getAuthorId() == this.author.getAuthorId());
+        this.content = content;
     }
 
     public void addSubComment(Comment comment) {
