@@ -74,6 +74,16 @@ public class Post {
         this.comments.remove(comment);
     }
 
+    public void updateCommet(UUID authorId, String content) {
+        ArrayList<Comment> targetPosts = findCommentOrNull(authorId);
+
+        if (targetPosts != null) {
+            for (Comment post : targetPosts) {
+                post.setContent(content);
+            }
+        }
+    }
+
     public void addEmoji(Emoji emoji) {
         this.emojis.add(emoji);
     }
@@ -118,5 +128,15 @@ public class Post {
 
     public ArrayList<Emoji> getEmojis() {
         return emojis;
+    }
+
+    private ArrayList<Comment> findCommentOrNull(UUID authorId) {
+        ArrayList<Comment> res = new ArrayList<>();
+        for (Comment comment : this.comments) {
+            if (comment.getAuthor().getAuthorId() == authorId) {
+                res.add(comment);
+            }
+        }
+        return res.size() != 0 ? res : null;
     }
 }

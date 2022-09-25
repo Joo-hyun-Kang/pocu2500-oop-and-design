@@ -25,20 +25,24 @@ public class Blog {
         this.posts.add(post);
     }
 
-    public boolean updateTitle(UUID authorId, Post post, String content) {
-        if (authorId != post.getAuthor().getAuthorId()) {
-            return false;
+    public void updateTitle(UUID authorId, String content) {
+        ArrayList<Post> targetPosts = findPostOrNull(authorId);
+
+        if (targetPosts != null) {
+            for (Post post : targetPosts) {
+                post.setTitle(content);
+            }
         }
-        post.setTitle(content);
-        return true;
     }
 
-    public boolean updateBody(UUID authorId, Post post, String content) {
-        if (authorId != post.getAuthor().getAuthorId()) {
-            return false;
+    public void updateBody(UUID authorId, String content) {
+        ArrayList<Post> targetPosts = findPostOrNull(authorId);
+
+        if (targetPosts != null) {
+            for (Post post : targetPosts) {
+                post.setBody(content);
+            }
         }
-        post.setBody(content);
-        return true;
     }
 
     public boolean updateTag(UUID authorId, Post post, String tag) {
@@ -133,5 +137,15 @@ public class Blog {
         }
 
         this.isAuthorFiltered = true;
+    }
+
+    private ArrayList<Post> findPostOrNull(UUID authorId) {
+        ArrayList<Post> res = new ArrayList<>();
+        for (Post post : this.posts) {
+            if (post.getAuthor().getAuthorId() == authorId) {
+                res.add(post);
+            }
+        }
+        return res.size() != 0 ? res : null;
     }
 }
