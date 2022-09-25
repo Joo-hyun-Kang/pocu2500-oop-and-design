@@ -4,6 +4,7 @@ import academy.pocu.comp2500.assignment1.*;
 import academy.pocu.comp2500.assignment1.registry.Registry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class Program {
@@ -15,21 +16,34 @@ public class Program {
 
         Author jokang = new Author(UUID.randomUUID(), "jokang");
 
-        Post post3 = new Post(UUID.randomUUID(), "cest3", "body", jokang);
-        Post post2 = new Post(UUID.randomUUID(), "best2", "body", jokang);
-        Post post1 = new Post(UUID.randomUUID(), "aest1", "body", jokang);
+        Post post2 = new Post(UUID.randomUUID(), "1", "body", jokang);
+        Post post3 = new Post(UUID.randomUUID(), "2", "body", jokang);
+        Comment comment = new Comment(UUID.randomUUID(), jokang, "why?");
 
+        post3.addComment(comment);
+
+        Blog blog = new Blog(jokang);
+        blog.addPost(post2);
+        //blog.addPost(post3);
         ArrayList<Post> posts = new ArrayList<>();
-        posts.add(post1);
-        posts.add(post2);
-        posts.add(post3);
+        posts = blog.getPosts();
 
-        System.out.println(post1.getCreateAt());
-        System.out.println(post1.getModifiedAt());
+        posts.forEach(post -> System.out.println(post.getTitle()));
+        System.out.println("hello world");
 
-        Blog blog = new Blog(null);
-        ArrayList<Post> post = blog.getPosts();
-        System.out.print(post);
+        comment.downvote(jokang);
+        System.out.println(comment.getvote());
 
+        comment.upvote(jokang);
+        System.out.println(comment.getvote());
+
+        comment.upvote(jokang);
+        System.out.println(comment.getvote());
+
+        comment.downvote(jokang);
+        System.out.println(comment.getvote());
+
+        comment.downvote(jokang);
+        System.out.println(comment.getvote());
     }
 }

@@ -9,8 +9,7 @@ public class Comment {
     private Author author;
     private String content;
     private ArrayList<Comment> subcomment;
-    private int upvote;
-    private int downvote;
+    private int vote;
     private ArrayList<UUID> upVoters;
     private ArrayList<UUID> downVoters;
 
@@ -31,13 +30,16 @@ public class Comment {
         return false;
     }
 
-    public void addSubComment(Comment subcomment) {
-        this.subcomment.add(subcomment);
+    public void addSubComment(Comment comment) {
+        this.subcomment.add(comment);
     }
 
-    public void removeSubcommnet(Author author, Comment subcomment) {
-        assert (author.getAuthorId() == subcomment.getAuthor().getAuthorId());
-        this.subcomment.remove(subcomment);
+    public boolean removeSubcommnet(Author author, Comment comment) {
+        if (author.getAuthorId() == comment.getAuthor().getAuthorId()) {
+            this.subcomment.remove(comment);
+            return true;
+        }
+        return false;
     }
 
     public void upvote(Author user) {
@@ -79,35 +81,31 @@ public class Comment {
         return subcomment;
     }
 
-    public int getUpvote() {
-        return upvote;
-    }
-
-    public int getDownvote() {
-        return downvote;
+    public int getvote() {
+        return vote;
     }
 
     public int getNetvote() {
-        return this.upvote - this.downvote;
+        return vote;
     }
 
     private void plusUpvote(UUID userId) {
-        upvote++;
+        vote++;
         upVoters.add(userId);
     }
 
     private void minusUpvote(UUID userId) {
-        upvote--;
+        vote--;
         upVoters.remove(userId);
     }
 
     private void plusDownvote(UUID userId) {
-        downvote++;
+        vote--;
         downVoters.add(userId);
     }
 
     private void minusDownvote(UUID userId) {
-        downvote--;
+        vote++;
         downVoters.remove(userId);
     }
 }
