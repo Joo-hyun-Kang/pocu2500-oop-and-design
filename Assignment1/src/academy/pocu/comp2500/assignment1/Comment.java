@@ -11,12 +11,16 @@ public class Comment {
     private ArrayList<Comment> subcomment;
     private int upvote;
     private int downvote;
+    private ArrayList<UUID> upVoters;
+    private ArrayList<UUID> downVoters;
 
     public Comment(UUID commentId, Author author, String content) {
         this.commentId = commentId;
         this.author = author;
         this.content = content;
         this.subcomment = new ArrayList<>();
+        this.upVoters = new ArrayList<>();
+        this.downVoters = new ArrayList<>();
     }
 
     public void setContent(String content) {
@@ -32,20 +36,26 @@ public class Comment {
         this.subcomment.remove(subcomment);
     }
 
-    public void plusUpvote() {
-        this.upvote++;
+    public void upvote(Author user) {
+        if (upVoters.contains(user.getAuthorId()) == false) {
+            plusUpvote(user.getAuthorId());
+            if (downVoters.contains(user.getAuthorId())) {
+                minusDownvote(user.getAuthorId());
+            }
+        } else {
+            minusUpvote(user.getAuthorId());
+        }
     }
 
-    public void plusDownvote() {
-        this.downvote++;
-    }
-
-    public void minusUpvote() {
-        this.upvote--;
-    }
-
-    public void minusDownvote() {
-        this.downvote--;
+    public void downvote(Author user) {
+        if (downVoters.contains(user.getAuthorId()) == false) {
+            plusDownvote(user.getAuthorId());
+            if (upVoters.contains(user.getAuthorId())) {
+                minusUpvote(user.getAuthorId());
+            }
+        } else {
+            minusDownvote(user.getAuthorId());
+        }
     }
 
     public UUID getCommentId() {
@@ -75,5 +85,25 @@ public class Comment {
 
     public int getNetvote() {
         return this.upvote - this.downvote;
+    }
+
+    private void plusUpvote(UUID userId) {
+        upvote++;
+        upVoters.add(userId);
+    }
+
+    private void minusUpvote(UUID userId) {
+        upvote--;
+        upVoters.remove(userId);
+    }
+
+    private void plusDownvote(UUID userId) {
+        downvote++;
+        downVoters.add(userId);
+    }
+
+    private void minusDownvote(UUID userId) {
+        downvote--;
+        downVoters.remove(userId);
     }
 }
