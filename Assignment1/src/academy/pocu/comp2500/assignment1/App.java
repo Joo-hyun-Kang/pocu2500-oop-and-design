@@ -42,8 +42,8 @@ public class App {
 
         registry.registerSubcommentListGetter("Comment", "getSubcomment");
 
-        registry.registerSubcommentUpvoter("Comment", "plusUpvote");
+        registry.registerSubcommentUpvoter("Comment", "upvote");
 
-        registry.registerSubcommentDownvoter("Comment", "plusDownvote");
+        registry.registerSubcommentDownvoter("Comment", "downvote");
     }
 }
