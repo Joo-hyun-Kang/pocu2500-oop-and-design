@@ -1,10 +1,10 @@
 package academy.pocu.comp2500.lab5;
 
 public class Barbarian {
-    private String name;
-    private int hp;
-    private int attack;
-    private int defense;
+    protected String name;
+    protected int hp;
+    protected int attack;
+    protected int defense;
 
     public Barbarian(String name, int hp, int attack, int defense) {
         this.name = name;
@@ -18,7 +18,10 @@ public class Barbarian {
     }
 
     public void attack(Barbarian target) {
-        double damage = (int)((this.attack - target.defense) / 2.0);
+        if (this.name.equals(target.name) || !isAlive()) {
+            return;
+        }
+        double damage = (int) ((this.attack - target.defense) / 2.0);
         damage = damage < 1 ? 1 : damage;
 
         target.hp -= damage;
