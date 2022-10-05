@@ -29,7 +29,7 @@ public class Gladiator extends Barbarian {
     }
 
     public void attack(String moveName, Barbarian target) {
-        if (super.name.equals(target.name)) {
+        if (super.name.equals(target.name) || !isAlive()) {
             return;
         }
 
@@ -38,12 +38,38 @@ public class Gladiator extends Barbarian {
             return;
         }
 
-        double damage = (int) (((double) super.attack / (target.defense * move.getPower())) / 2.0);
+        double damage = (int) (((double) super.attack / target.defense * move.getPower()) / 2.0);
         damage = Math.max(damage, 1);
 
         target.hp -= damage;
         target.hp = Math.max(target.hp, 0);
     }
+
+    /*
+    C13_AttackWithMove
+지정된 공격 스킬이 적에게 올바른 피해를 입히는지 확인합니다.
+
+C14_AttackWithMoveWhileDead
+글래디에이터가 죽었을 때 공격할 수 있는지 테스트합니다.
+
+C15_AttackWithMovesWithoutPowerPoints
+파워 수치가 모자랄 때 공격 스킬을 사용하는 경우를 테스트합니다.
+
+C16_AttackSelfWithMoveUsesNoPowerPoints
+자기 자신을 공격하였을 때 파워포인트를 소모하지 않는지 테스트합니다.
+
+C17_AttackWithNonExistingMove
+알지 못하는 공격 스킬을 사용하는 경우를 테스트합니다.
+
+C18_MoveDamageLtOrEqZero
+지정된 공격 스킬의 피해치 계산 결과가 0 이하인 경우를 테스트합니다.
+
+C19_MoveDamageGtHp
+지정된 공격 스킬의 피해치 계산 결과가 적의 HP보다 큰 경우를 테스트합니다.
+
+C20_AttackWithMoveSelf
+공격자가 자신을 공격하는 경우를 테스트합니다.
+     */
 
     public void rest() {
         super.hp += 10;

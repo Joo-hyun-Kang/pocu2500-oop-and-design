@@ -43,6 +43,19 @@ public class Program {
         }
 
         {
+            Gladiator gladiator0 = new Gladiator("Dragonborn Whiterun", 100, 250, 10);
+            Gladiator gladiator1 = new Gladiator("Ulfric Stormcloak", 1000, 300, 77);
+            Move move = new Move("Hadoken", 120, 20);
+
+            assert gladiator0.addMove(move); // true
+
+            gladiator0.attack("Hadoken", gladiator1);
+
+            System.out.println(gladiator1.getHp());
+            assert gladiator1.getHp() == 806; // 806
+        }
+
+        {
             Barbarian barbarian0 = new Barbarian("Dragonborn Whiterun", 250, 210, 60);
             Barbarian barbarian1 = new Barbarian("Ulfric Stormcloak", 200, 70, 10);
 
