@@ -11,7 +11,7 @@ public class Gladiator extends Barbarian {
     }
 
     public boolean addMove(Move move) {
-        if (moves.contains(move) || moves.size() >= 4) {
+        if (getMoveOrNull(move.getName()) != null || moves.size() >= 4) {
             return false;
         }
         moves.add(move);
@@ -30,12 +30,12 @@ public class Gladiator extends Barbarian {
 
     public void attack(String moveName, Barbarian target) {
         if (super.name.equals(target.name)) {
-            return ;
+            return;
         }
 
         Move move = getMoveOrNull(moveName);
         if (move == null || move.getPowerPoint() < 1) {
-            return ;
+            return;
         }
 
         double damage = (int) (((double) super.attack / (target.defense * move.getPower())) / 2.0);
