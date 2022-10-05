@@ -1,8 +1,6 @@
 package academy.pocu.comp2500.lab5.app;
 
-import academy.pocu.comp2500.lab5.Barbarian;
-import academy.pocu.comp2500.lab5.Gladiator;
-import academy.pocu.comp2500.lab5.Move;
+import academy.pocu.comp2500.lab5.*;
 
 public class Program {
 
@@ -56,6 +54,22 @@ public class Program {
         }
 
         {
+            Gladiator gladiator0 = new Gladiator("Dragonborn Whiterun", 100, 250, 10);
+            Gladiator gladiator1 = new Gladiator("Ulfric Stormcloak", 1000, 300, 77);
+            Move move = new Move("Hadoken", 120, 20);
+
+            gladiator0.addMove(move);
+
+            gladiator0.attack("Hadoken", gladiator1);
+
+            assert gladiator1.getHp() == 806; // 806
+
+            gladiator1.rest();
+
+            assert gladiator1.getHp() == 816; // 816
+        }
+
+        {
             Barbarian barbarian0 = new Barbarian("Dragonborn Whiterun", 250, 210, 60);
             Barbarian barbarian1 = new Barbarian("Ulfric Stormcloak", 200, 70, 10);
 
@@ -84,6 +98,56 @@ public class Program {
             assert gladiator0.removeMove("Surf");
 
             gladiator0.attack("Gomu Gomu no pistol", barbarian0);
+
+            assert barbarian0.getHp() == 163;
+            assert barbarian0.isAlive();
+
+            gladiator0.attack("Gomu Gomu no pistol", gladiator1);
+
+            assert gladiator1.getHp() == 20;
+
+            gladiator1.rest();
+
+            assert gladiator1.getHp() == 30;
+
+            gladiator1.rest();
+            assert gladiator1.getHp() == 40;
+
+            gladiator1.rest();
+            assert gladiator1.getHp() == 50;
+
+            gladiator1.rest();
+            assert gladiator1.getHp() == 60;
+
+            gladiator1.rest();
+            assert gladiator1.getHp() == 70;
+
+            gladiator1.rest();
+            assert gladiator1.getHp() == 80;
+
+            gladiator1.rest();
+            assert gladiator1.getHp() == 90;
+
+            gladiator1.rest();
+            assert gladiator1.getHp() == 100;
+
+            gladiator1.rest();
+            assert gladiator1.getHp() == 100;
+
+            Knight knight0 = new Knight("Naruto", 252, 310, 99);
+            Knight knight1 = new Knight("Sasuke", 250, 290, 111);
+            Pet pet0 = new Pet("Giant Toad", 180);
+
+            knight0.setPet(pet0);
+
+            knight0.attackTogether(gladiator0);
+
+            assert gladiator0.getHp() == 10;
+
+            knight0.attackTogether(knight1);
+
+            assert knight1.getHp() == 61;
+
         }
 
     }

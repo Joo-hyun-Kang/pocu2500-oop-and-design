@@ -18,5 +18,8 @@ public class Knight extends Barbarian {
 
         double damage = (int) ((super.attack + pet.attack - target.defense) / 2.0);
         damage = Math.max(damage, 1);
+
+        target.hp -= damage;
+        target.hp = Math.max(target.hp, 0);
     }
 }
