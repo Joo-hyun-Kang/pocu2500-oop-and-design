@@ -4,11 +4,13 @@ public class Move {
     private String name;
     private int power;
     private int powerPoint;
+    private int maxPowerPoint;
 
     public Move(String name, int power, int powerPoint) {
         this.name = name;
         this.power = power;
         this.powerPoint = powerPoint;
+        this.maxPowerPoint = powerPoint;
     }
 
     public String getName() {
@@ -21,6 +23,10 @@ public class Move {
 
     public int getPowerPoint() {
         return powerPoint;
+    }
+
+    public int getMaxPowerPoint() {
+        return maxPowerPoint;
     }
 
     public void plusPowerPoint() {
