@@ -16,7 +16,7 @@ public class Knight extends Gladiator {
             return;
         }
 
-        double damage = (int) ((super.attack + pet.attack - target.defense) / 2.0);
+        double damage = (int) ((super.attack + pet.getAttack() - target.defense) / 2.0);
         damage = Math.max(damage, 1);
 
         target.hp -= damage;
