@@ -51,13 +51,13 @@ public class Gladiator extends Barbarian {
             return;
         }
 
-        super.hp = Math.min(super.hp + 10, super.maxHp);
+        super.hp = Math.min(super.hp + 10, super.MAX_UP);
 
-        for (Move move : moves) {
-            if (move.getPower() < move.getMaxPowerPoint()) {
-                move.plusPowerPoint();
-            }
-        }
+//        for (Move move : moves) {
+//            if (move.getPower() < move.getMaxPowerPoint()) {
+//                move.plusPowerPoint();
+//            }
+//        }
     }
 
     private Move getMoveOrNull(String name) {
