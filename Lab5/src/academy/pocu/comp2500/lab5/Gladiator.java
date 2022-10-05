@@ -47,17 +47,10 @@ public class Gladiator extends Barbarian {
     }
 
     public void rest() {
-        if (!isAlive()) {
-            return;
+        super.hp += 10;
+        if (super.hp > super.MAX_HP) {
+            super.hp = super.MAX_HP;
         }
-
-        super.hp = Math.min(super.hp + 10, super.MAX_UP);
-
-//        for (Move move : moves) {
-//            if (move.getPower() < move.getMaxPowerPoint()) {
-//                move.plusPowerPoint();
-//            }
-//        }
     }
 
     private Move getMoveOrNull(String name) {

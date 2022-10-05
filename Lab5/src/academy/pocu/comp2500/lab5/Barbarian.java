@@ -5,14 +5,14 @@ public class Barbarian {
     protected int hp;
     protected int attack;
     protected int defense;
-    protected final int MAX_UP;
+    protected final int MAX_HP;
 
     public Barbarian(String name, int hp, int attack, int defense) {
         this.name = name;
         this.hp = hp;
         this.attack = attack;
         this.defense = defense;
-        this.MAX_UP = hp;
+        this.MAX_HP = hp;
     }
 
     public int getHp() {
