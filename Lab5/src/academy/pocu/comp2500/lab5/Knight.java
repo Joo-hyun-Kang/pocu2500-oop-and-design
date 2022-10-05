@@ -13,7 +13,7 @@ public class Knight extends Gladiator {
 
     public void attackTogether(Barbarian target) {
         if (super.name.equals(target.name) || !isAlive() || pet == null) {
-            return ;
+            return;
         }
 
         double damage = (int) ((super.attack + pet.attack - target.defense) / 2.0);
