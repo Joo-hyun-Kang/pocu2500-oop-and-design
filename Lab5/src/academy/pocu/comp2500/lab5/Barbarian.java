@@ -5,7 +5,7 @@ public class Barbarian {
     protected int hp;
     protected int attack;
     protected int defense;
-    private int maxHp;
+    protected int maxHp;
 
     public Barbarian(String name, int hp, int attack, int defense) {
         this.name = name;
@@ -17,10 +17,6 @@ public class Barbarian {
 
     public int getHp() {
         return hp;
-    }
-
-    public int getMax_hp() {
-        return maxHp;
     }
 
     public void attack(Barbarian target) {
