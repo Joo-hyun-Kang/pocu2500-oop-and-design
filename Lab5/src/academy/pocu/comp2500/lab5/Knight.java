@@ -1,6 +1,6 @@
 package academy.pocu.comp2500.lab5;
 
-public class Knight extends Barbarian {
+public class Knight extends Gladiator {
     private Pet pet;
 
     public Knight(String name, int hp, int attack, int defense) {
