@@ -39,6 +39,7 @@ public class Gladiator extends Barbarian {
         }
 
         double damage = (int) (((double) super.attack / target.defense * move.getPower()) / 2.0);
+        move.minusPowerPoint();
         damage = Math.max(damage, 1);
 
         target.hp -= damage;
@@ -46,12 +47,6 @@ public class Gladiator extends Barbarian {
     }
 
     /*
-    C13_AttackWithMove
-지정된 공격 스킬이 적에게 올바른 피해를 입히는지 확인합니다.
-
-C14_AttackWithMoveWhileDead
-글래디에이터가 죽었을 때 공격할 수 있는지 테스트합니다.
-
 C15_AttackWithMovesWithoutPowerPoints
 파워 수치가 모자랄 때 공격 스킬을 사용하는 경우를 테스트합니다.
 
