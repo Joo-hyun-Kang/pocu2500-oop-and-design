@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Meal extends Menu {
     protected ArrayList<Dessert> desserts = new ArrayList<>();
     protected ArrayList<Appetizer> appetizers = new ArrayList<>();
-    protected MainCourse mainCourse;
+    protected ArrayList<MainCourse> mainCourses = new ArrayList<>();
 
-    public Meal(int price) {
+    protected Meal(int price) {
         super(price);
     }
 
@@ -19,8 +19,7 @@ public class Meal extends Menu {
         return this.appetizers;
     }
 
-    public MainCourse getMainCourse() {
-        assert (this.mainCourse != null) : "call isValid() first!";
-        return this.mainCourse;
+    public ArrayList<MainCourse> getMainCourse() {
+        return this.mainCourses;
     }
 }

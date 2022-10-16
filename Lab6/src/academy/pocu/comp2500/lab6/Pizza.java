@@ -11,7 +11,7 @@ public class Pizza extends Menu {
     protected boolean isVeggieAdded;
     protected boolean isCheeseAdded;
 
-    public Pizza(int price) {
+    protected Pizza(int price) {
         super(price);
     }
 

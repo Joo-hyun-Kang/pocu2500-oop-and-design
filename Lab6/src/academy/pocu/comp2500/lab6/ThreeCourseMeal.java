@@ -17,7 +17,7 @@ public class ThreeCourseMeal extends Meal {
 //    }
 
     public boolean isValid() {
-        return this.appetizers.size() != 0 && this.mainCourse != null && this.desserts.size() != 0;
+        return this.appetizers.size() != 0 && this.mainCourses.size() != 0 && this.desserts.size() != 0;
     }
 
 //    public Appetizer getAppetizer() {
@@ -33,7 +33,7 @@ public class ThreeCourseMeal extends Meal {
 //    }
 
     public void setMainCourse(MainCourse mainCourse) {
-        this.mainCourse = mainCourse;
+        this.mainCourses.add(mainCourse);
     }
 
     public void setAppetizer(Appetizer appetizer) {
