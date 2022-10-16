@@ -2,7 +2,7 @@ package academy.pocu.comp2500.lab6;
 
 import java.util.ArrayList;
 
-public class Pizza {
+public class Pizza extends Menu {
     protected int price;
     protected ArrayList<Topping> toppings = new ArrayList<>();
     protected int meatCount;
@@ -12,11 +12,7 @@ public class Pizza {
     protected boolean isCheeseAdded;
 
     public Pizza(int price) {
-        this.price = price;
-    }
-
-    public int getPrice() {
-        return this.price;
+        super(price);
     }
 
 //    public boolean isValid() {

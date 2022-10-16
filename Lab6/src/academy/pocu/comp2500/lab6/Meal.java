@@ -2,18 +2,13 @@ package academy.pocu.comp2500.lab6;
 
 import java.util.ArrayList;
 
-public class Meal {
-    protected int price;
+public class Meal extends Menu {
     protected ArrayList<Dessert> desserts = new ArrayList<>();
     protected ArrayList<Appetizer> appetizers = new ArrayList<>();
     protected MainCourse mainCourse;
 
     public Meal(int price) {
-        this.price = price;
-    }
-
-    public int getPrice() {
-        return this.price;
+        super(price);
     }
 
     public ArrayList<Dessert> getDesserts() {
