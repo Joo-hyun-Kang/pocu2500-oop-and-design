@@ -17,6 +17,7 @@ public class FreeSoulPizza extends Pizza {
 //    public int getPrice() {
 //        return this.price;
 //    }
+
     public FreeSoulPizza() {
         super(PRICE);
     }
