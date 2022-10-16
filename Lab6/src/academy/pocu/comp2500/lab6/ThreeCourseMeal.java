@@ -5,7 +5,7 @@ public class ThreeCourseMeal extends Meal {
 
 //    private int price = PRICE;
 //    private Appetizer appetizer;
-    private MainCourse mainCourse;
+
 //    private Dessert dessert;
 
     public ThreeCourseMeal() {
@@ -25,10 +25,7 @@ public class ThreeCourseMeal extends Meal {
 //        return this.appetizer;
 //    }
 
-    public MainCourse getMainCourse() {
-        assert (this.mainCourse != null) : "call isValid() first!";
-        return this.mainCourse;
-    }
+
 
 //    public Dessert getDessert() {
 //        assert (this.dessert != null) : "call isValid() first!";

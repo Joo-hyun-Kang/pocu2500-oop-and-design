@@ -5,10 +5,6 @@ import java.util.ArrayList;
 public class NoHeavyMeal extends Meal {
     private static final int PRICE = 15;
 
-//    private int price = PRICE;
-//    private ArrayList<Appetizer> appetizers = new ArrayList<>();
-//    private Dessert dessert;
-
     public NoHeavyMeal() {
         super(PRICE);
     }

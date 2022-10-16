@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class DeathByDesserts extends Meal {
     private static final int PRICE = 20;
-//    private int price = PRICE;
     private boolean isValid;
 //    private ArrayList<Dessert> desserts = new ArrayList<>();
 
