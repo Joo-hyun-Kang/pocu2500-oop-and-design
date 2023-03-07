@@ -1,0 +1,100 @@
+Vice Versa
+ Oct 3rd, 2022 at 9:24 AM
+코드 공유합니다.
+자료구조까지 고민해보는 유익한 시간이었습니다,
+HashMap과 LinkedList의 조합으로 작성하다가,
+LinkedList의 일부를 LinkedHashSet으로 바꿔보았습니다.
+https://comp2500-202209-ko.slack.com/archives/C03TYBNHKH9/p1664630143526179?thread_ts=1664626921.062699&cid=C03TYBNHKH9 (edited) 
+lab4
+ 
+// EvictionPolicy.java(enum)는 생략
+​
+​
+//MemoryCache.java
+Click to expand inline (108 lines)
+
+
+
+
+[조교]Hong
+String도 클래스이기에 ==로 비교하는 부분에서 문제가 발생한 것 같습니다.
+다른 자료구조를 선택하면 현재 직접 구현하신 기능을 제거할 수 있습니다. 여유가 되신다면 배열과 비슷하며  더 제한적인 자료구조를 고민해보시길 바랍니다.
+From a thread in lab04 | Oct 1st, 2022 | View reply
+:slightly_smiling_face:
+7
+:+1:
+2
+
+9 replies
+
+
+oakmura
+  3 months ago
+코드 잘 봤습니다! :bow:
+LinkedHashSet이라는 순서를 유지해주면서 탐색, 추가, 삭제를 O(1)로 해주는 자료구조가 있었네요 ㅎ
+LinkedHashMap이 막힌 상황에서 커스텀 자료형을 구현해야만 한다고 생각했습니다!
+
+
+Vice Versa
+  3 months ago
+https://st-lab.tistory.com/258
+여기에 있는 그림설명을 보니 이해에 도움이 되더라구요 ㅎ
+물론... 이것도 구현해보신다면 큰 공부가 되실꺼라 생ㄱ(농담입니다ㅎ)
+Stranger's LABStranger's LAB
+자바 [JAVA] - Linked Hash Set (연결 해시 셋) 구현하기
+자료구조 관련 목록 링크 펼치기 더보기  0. 자바 컬렉션 프레임워크 (Java Collections Framework)  1. 리스트 인터페이스 (List Interface)  2. 어레이리스트 (ArrayList)  3. 단일 연결리스트 (Singly Li..
+Jul 2nd, 2021 (50 kB)
+https://st-lab.tistory.com/258
+
+
+
+oakmura
+  3 months ago
+이해만 할게요... :face_with_peeking_eye: (런..) 감사합니다! 어떻게 구현해야 할지 알것같아요 :slightly_smiling_face:
+
+
+Rhange
+  3 months ago
+코드 잘 보았습니다. :slightly_smiling_face:
+line 26, 52, 65: 에서 !instanceMap.containsKey(myHardDiskName)  표현으로 작성하면 더 좋을 것 같아요.
+
+
+Vice Versa
+  3 months ago
+@Rhange
+
+저번 학기 언매니지드 강의 때
+if (counter) 보다 더 명시적인 스타일을,
+if (!ptr)보다 if (ptr == NULL)를
+가독성 측면에서 더 선호하신다는 기억이 있어, 이번 강의도 그렇게 작성하긴 하였습니다.
+IDE(인텔리제이)는 Rhange님처럼 작성하는게 더 심플하다고 권유하긴 하더라구요.
+음...
+간크게 태그해봅니다...!
+ 
+@[강사] 포프
+ (edited) 
+
+
+oakmura
+  3 months ago
+두 분의 방법 모두 맞는 방법 같습니다! 선호도의 차이같아요.
+근데, if (포인터) 는 if (isAlive) 와 같은 보통의 불리언 식과는 다르게 처음 봤을때 변수명에서 if (포인터) 가 뭐지? 라는 생각을 한번 더 해야될수도 있기때문에 명시적으로 if (포인터 != NULL) 을 써주는거라고 생각하긴합니다..!
+
+
+Rhange
+  3 months ago
+아 언매니지드 강의에서 그런 이야기가 있었군요. (아직 안들어서 몰랐네요 ㅎ)
+
+
+[강사] 포프
+  3 months ago
+@Vice Versa
+ 저 개인적으로는 false나 true는 직접 비교 안합니다. (특히 true하고는 비교 안함)
+
+
+[강사] 포프
+  3 months ago
+bool 형이 자체적으로 없는 C 하고는 다르죠...
+:pray:
+1
+

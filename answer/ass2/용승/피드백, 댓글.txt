@@ -1,0 +1,82 @@
+용승
+ Oct 17th at 12:26 PM
+코드 공유합니다. 클래스 순서와 관계는 댓글에서 추가 설명하겠습니다.
+제 코드에서 보완하거나 고쳐야 할 부분이라고 생각되는 것은
+클래스별로 Enum 사용 방식이 통일적이지 않아서, 하위 클래스의 사용법이 헷갈릴 수 있다
+Enum에 너무 많은 정보를 담고 있다
+등이 있습니다.
+다른 분들 코드 보면서 더 많은 통찰을 얻게 되네요. 감사합니다. (edited) 
+Untitled
+ 
+// Product
+package academy.pocu.comp2500.assignment2;
+import java.util.UUID;
+public class Product {
+    private final UUID id;
+Click to expand inline (470 lines)
+
+
+:+1:
+4
+
+5 replies
+
+
+용승
+  2 months ago
+클래스 상속 관계
+Product (생성자 protected)
+ㄴ CustomizableProduct (생성자 protected)
+     ㄴ Banner
+     ㄴ BusinessCard
+ㄴ Stamp
+ㄴ Calendar
+Aperture
+ㄴ ImageAperture
+ㄴ TextAperture
+Color
+Cart (edited) 
+
+
+용승
+  2 months ago
+코드 첨부 순서
+Product
+Stamp
+ㄴ StampColor
+ㄴ StampSize
+Calendar
+ㄴ CalendarType
+Banner
+ㄴ BannerSize
+ㄴ BannerType
+BusinessCard
+ㄴ BusinessCardColor
+ㄴ BusinessCardSides
+ㄴ Orientation
+ㄴ PaperType
+ShippingMethod
+Color
+Aperture
+ImageAperture
+TextAperture
+CustomizableProduct
+Cart
+
+
+용승
+  2 months ago
+다음에는 UML을 미리 어디선가 생성하든지 그려서 첨부하면 훨씬 좋겠네요... :joy:
+
+
+칼퇴왕김야근
+  2 months ago
+intellij쓰시면 작성된코드베이스루 그려줍니다 :slightly_smiling_face:
+:pray:
+2
+
+
+
+oakmura
+  2 months ago
+저는 사이즈 enum들을 OPTION_1 이런식으로 적었는데, 용승님 방식이 훨씬 직관적인것같네요 :+1:

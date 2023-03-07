@@ -1,0 +1,15 @@
+코드왕
+  1 month ago
+109 : 제 개인적으로는 maintenanceStartTime만 멤버변수로 저장해두고 EndTime 관련 값은 getter를 이용해서 필요할 때마다 호출하는 게 유지, 보수하기에는 좋다는 생각이 듭니다
+228: CacheMiddleware의 handle()가 제 코드와는 다르게 가독성이 정말 좋네요.. 항상 코드 잘 보고 있습니다:slightly_smiling_face:
+:pray:
+1
+
+
+
+oakmura
+  1 month ago
+@코드왕
+
+흐미.. 좋은 말씀 감사합니다 :bow:
+109 - 중복 데이터였네요 ㅎ 피드백 감사합니다~

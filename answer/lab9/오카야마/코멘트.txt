@@ -1,0 +1,14 @@
+oakmura
+  1 month ago
+BuyOneGetOneFree 클래스는 Book 클래스의 equals 와 hashCode 매서드를 오버라이딩 해서, 같은 책이 몇권 들어왔는지 hashmap 을 사용해서 트래킹 해주었습니다
+DecadeMadness 클래스는 출판연도를 10으로 나눈 값이 같은 경우 같은 decade에 속한 책이라고 판단해서, 10으로 나눈 값을 hashmap의 키로 사용해서 같은 decade에 속한 책이 총 몇권인지 트래킹 해주었습니다
+
+
+Rhange
+  1 month ago
+아 decade 10 나눈 후에 굳이 10을 곱해주지 않아도 되었네요. :melting_face:
+
+
+oakmura
+  1 month ago
+네넵 ㅎㅎ

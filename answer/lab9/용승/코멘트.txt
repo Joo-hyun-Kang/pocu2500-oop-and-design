@@ -1,0 +1,61 @@
+
+용승
+ Nov 21st, 2022 at 12:27 PM
+코드 공유합니다.
+:+1:
+3
+
+5 replies
+
+
+용승
+  1 month ago
+Untitled
+ 
+// Cart.java
+package academy.pocu.comp2500.lab9;
+​
+import java.util.ArrayList;
+import java.util.Arrays;
+Click to expand inline (228 lines)
+
+
+
+
+oakmura
+  1 month ago
+코드 잘봤습니다 :+1:
+SimplePriceModel 개체를 통해서 originalPrice를 구할수 있었군요!
+compareTo 오버라이딩은 sort() 함수에서 어떤 기준으로 책들을 정렬해줄지를 위함인가요?
+170 - 확실한건 측정을 해보는 수밖에 없지만, 매번 새로운 hashmap을 생성하는 것보다, 매개변수로 hashmap을 들고있다가 clear() 하는게 조금 더 효율적일수도 있다고 알고있습니당
+래퍼런스 : https://stackoverflow.com/questions/6757868/map-clear-vs-new-map-which-one-will-be-better (edited) 
+Stack OverflowStack Overflow
+Map.clear() vs new Map : Which one will be better?
+I have a Map as syntax as Map<String, String> testMap = new HashMap<String, String>();.
+In this map there can be 1000 data.
+When my application requires to new list of data, then I m...
+
+
+용승
+  1 month ago
+@oakmura
+ 피드백 감사합니다.
+넵 compareTo는 정렬하는 것 때문에 override 했습니다.
+오 넵 그럴 가능성이 크겠네요!! 저도 코드에서 가능한 new를 줄이고자 했는데, 코드 가독성이나 개체의 적절한 설계까지 같이 잡으려고 하니 쉽지 않더라구요.. 가령 "이 클래스 자체는 가격 모델을 의미하는데, 특정 Book 콜렉션 매핑 정보를 멤버 변수로 가지는 게 맞는 걸까?" 하는 고민 같은 게 해결이 안 되어서 그냥 매번 new HashMap을 하는 쪽을 선택하게 되었습니다.
+피드백 감사합니다 :blush:
+:+1:
+1
+
+
+
+oakmura
+  1 month ago
+맞슴돠, 분명 자연스럽지 못한것같아요 ㅋ..ㅋ (다 그런부분까지 고려하셨던거였군요 :laughing:)
+
+
+용승
+  1 month ago
+앗, 자연스럽지 못하다고까지 생각하지는 않습니다!! 그저 제 코드 작성 습관 중 하나라고 생각해주시면 좋을 것 같습니다. :blush: 말씀 듣고 이런저런 생각 하다 보니 "가격 모델 클래스 자체가 미리 생성해 놓은 HashMap pool 같은 것을 멤버 변수로 두고, getTotalPrice()가 호출될 때마다 하나씩 넘겨주는 방법도 가능하지 않을까?! " 같은 생각도 드네요. comp2500 과목 중심 주제는 아니지만 ㅎ..ㅎ
+:star-struck:
+1
+

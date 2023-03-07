@@ -1,0 +1,109 @@
+코드왕
+ Oct 17th, 2022 at 12:10 PM
+주문하신 피자 나왔습니다. 빡센 피드백 부탁드립니다..
+lab6
+ 
+public class Menu {
+    protected int price;
+    protected boolean isValid;
+​
+    protected Menu(int price) {
+Click to expand inline (435 lines)
+
+
+:+1:
+7
+
+10 replies
+
+
+봄바야
+  2 months ago
+자유영혼피자가 안보이네용 ㅠㅜ 저랑 코드가 유사해서 잘 보고있습니다! 저는 실패했지만 ㅎㅎ.. (edited) 
+
+
+코드왕
+  2 months ago
+FreeSoulPizza
+ 
+public class FreeSoulPizza extends Pizza {
+    private static final int PRICE = 25;
+    private static final int MAX_MEAT_COUNT = 2;
+    private static final int MAX_VEGGIE_COUNT = 2;
+Click to expand inline (88 lines)
+
+
+
+
+코드왕
+  2 months ago
+@봄바야
+ 앗 영혼이 잠깐 가출 했었네요.. 저랑 코딩 스타일이 비슷하신가 보네요 감사합니다 ㅎㅎ
+
+
+봄바야
+  2 months ago
+경우의 수의 함정에 빠져서 혼자 상상의 나래를 펼치다. 결국 안되었던 것을 알게되었습니다.. 요구사항 잘 읽어야겠네요.
+저의 경우 최하위 자식들(자유영혼, 고기사랑등등) 에게 topping 리스트의 삽입/삭제 권한을 주지않고 그 부모에게 전가하는 과정에서 추상화가 어려워지는 문제 + 저의 부족한 실력(=>가장핵심)과 기억력(?)이 얽히면서 문제가 점점 더 어려워졌네요.
+부모에게 protected addTopping ,protected removeTopping 을 주고 자식이 상황에 따라 부모를 호출하여 삽입 및 삭제하는 접근법에 대해 고민해보셨을 것 같은데, 삽입 및 삭제 권한을 자식에게 주는 위 방법을 선택하신 이유를 들어볼 수 있을까요 ?
+코드 매우 잘 보았습니다. 감사합니다. (edited) 
+
+
+코드왕
+  2 months ago
+@봄바야
+ 아 addTopping 메서드를 Pizza클래스에게 주려는 시도를 하시다가 말리신 건가요? 제가 addToping을 Pizza 클래스에게 주지 않은 이유는 다음과 같은 이유였던 것 같습니다
+ 피자별로 사용되는 토핑이 제각각이어서(각 피자 클래스에 토핑의 추가/제거에 대한 메서드가 이미 잘 구현되어있어서 굳이 건들지 않았음)
+명세서에 다형성을 사용하지 말라고 되어있어서
+사실 다형성을 써도 된다고 했어도 addToping을 부모에게 주지 않았을 거 같긴합니다. 왜냐하면 각 피자 메뉴가 명확히 정해져있는 상황이라 MeatLoverPizzz, VeggiePizza, ... 이것들만 개체를 생성화하면 되는 상황이고 Pizza클래스는 개체를 생성할 필요가 없으니까요 . 또 VeggiePizza를 예를 들면 veggiePizza1이라는 개체를 생성한 후에 토핑을 추가/제거 해야하는 상황이 왔을 때 각 토핑별로 메서드를 가지고 있는 편이 메뉴에 없는 피자를 그나마 만들기 덜 힘든 방법이라고 생각했습니다. veggiePizza1. 이라고 입력했을 때 addMozzarella(), addFetaCheese() 이라는 메서드가 자동완성으로 명확히 나올테니까요. (edited) 
+:+1:
+2
+
+
+
+전기쥐
+  2 months ago
+저랑 함수, 클래스네이밍 스타일이 똑같아서 깜짝 놀랐네요:rolling_on_the_floor_laughing:
+https://comp2500-202209-ko.slack.com/archives/C03TYEV5FBL/p1666017235922489 (edited) 
+
+
+전기쥐
+코드 공유합니다 (edited) 
+제목 없음
+ 
+
+제목 없음
+C#
+Posted in lab06 | Oct 17th, 2022 | View message
+:face_with_monocle:
+1
+
+
+
+코드왕
+  2 months ago
+@전기쥐
+  어 진짜네요. 어떻게 updateValidity() 까지 똑같죠? :astonished:
+Also sent to the channel
+
+
+[POCU 직원] 케로
+  2 months ago
+저희가 생각햇던 설계와 가장 흡사한 설계입니다 :)
+:100:
+9
+
+
+
+이승우
+  2 months ago
+역시 코드왕님이십니다!
+:bow:
+1
+
+
+
+코드왕
+  2 months ago
+@이승우
+  다른 분들의 스레드가 도움이 많이 되었던 같네요. 특히 oakmura님이 큰 도움 주셨어요.. :bow:

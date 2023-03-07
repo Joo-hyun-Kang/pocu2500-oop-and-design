@@ -1,0 +1,9 @@
+lab1: 100
+lab2: 100
+lab3: 100
+lab4: 0
+lab5: 100
+lab6: 70
+
+ass1: 66
+ass2: 

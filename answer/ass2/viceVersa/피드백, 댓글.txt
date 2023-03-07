@@ -1,0 +1,100 @@
+Vice Versa
+ Oct 17th at 12:35 PM
+코드 공유합니다. 아래는 저의 코멘트입니다 :slightly_smiling_face:
+1. 먼저 enum을 class처럼 써보니 좀 더 간결해지게 되는 인상을 받아, 열거형 인자가 클래스처럼 정보를 갖는 형태로 초안을 작성했음. 하지만 이는 다른 언어에서 통용되는 방식은 아니며 enum은 순수하게 (종류가 제한된) 본연의 형태로 쓰는게 좋다는 강의 내용을 수렴하여 물품 클래스의 생성자가 명세서의 역할을 떠안는 방식으로 변경함.
+2. Java 상속에서 부모클래스 필드의 접근제어자(protected)에 대한 의문이 있었는데(private으로 바꿔서 시도해보기도 함), 이 과제는 상속을 배우는 과제이고 앞으로 더 배우고 시야가 넓어지면 그 때 다시 되돌아볼 수 있을 듯 하여 이부분은 넘어가기로 함
+3. productId를 활용하여 shoppingCart에 넣은 아이템을 식별하고 싶었음. 처음 방식인 Product 클래스의 매개변수 전달은 통과. 그러나 진행하면서 key : productId, value : Product 형태로 바꿔 카트담기에 활용해보려하니 잘 되지 않았고, 원래의 방식으로 제출함
+4. 적어가면서 '뼈대를 이렇게 잡아가는 거구나' 감을 잡아나간 것이 이 과제의 가장 큰 수확이었음
+p.s. 조건문 else에 assert를 쓰니, 앞에 선언한 변수 초기화하라고 뻘건 밑줄이 쳐지더군요. 몰라서 0(혹은 null)으로 초기화하는건 아닌데... 이건 어쩔 수 없는 거겠죠;;;? (edited) 
+Assignment2
+ 
+// enum 파일은 생략 (특이사항 없음)
+​
+-------------------------- ShoppingCart
+​
+package academy.pocu.comp2500.assignment2;
+Click to expand inline (469 lines)
+:+1:
+7
+
+11 replies
+
+
+칼퇴왕김야근
+  2 months ago
+product item관리에 linkedhashmap쓰신 이유가 있으실까용?
+
+
+Vice Versa
+  2 months ago
+ShoppingCart에 LinkedHashSet 말씀하시는거죵?
+3번에서 key-value형태로 카트넣기하고 반복문으로 map순회하려고 이것저것 시도하면서 linkedhashmap을 썼었습니다. 그러고서 원래 무심코 넣은 리스트로 돌아가려 할 때 문득, 여기서 hashset도 통과시켜주나... 하던게 저렇게 되었네요ㅎㅎ;;
+// 여기서 같은 제품(옵션)의 인스턴스 Product a가 중복될 수 있는가? 라는 것에 관한 거라면, 어쩌면 저는 중복된 선택이라는 걸 경고하는 차원에서 set을 넣어주면 어떨까 합니다. 다시 복기하게 되네요...ㅎ 다른 의견 있으시면 말씀주세요! (edited) 
+
+
+칼퇴왕김야근
+  2 months ago
+앗.. set이었군요 아뇨 궁금해서 그냥 여쭤보는거였어요 ㅎㅎ
+
+
+칼퇴왕김야근
+  2 months ago
+메모리 어드레스 동일한 개체를 같은 상품으로 보시는거죠?
+
+
+Vice Versa
+  2 months ago
+네 같은 스펙인 a, b는 다른 개체지만 동일한 개체 a면 원치않는 중복 선택의 여지가 있지 않을까 생각해봅니당 (edited) 
+
+
+칼퇴왕김야근
+  2 months ago
+HashSet말고 LinkedHashSet로 쓰신 이유는 있으실까요?
+
+
+Vice Versa
+  2 months ago
+그건 반복문을 의식해서 그리 하였는데, 지금 확인해보니 반복문에 큰 무리가 없군요 :sweat_smile: (edited) 
+
+
+칼퇴왕김야근
+  2 months ago
+앗 그렇시군요 답변 감사합니당
+
+
+oakmura
+  2 months ago
+주관적인 의견이지만 148~159, 161~169: 사이즈와 색상을 반환하는 private static method를 클래스내에 정의해서 사용해주는것도 좋을것같아요! (사실 잘 모르겠네요.. 재사용성이 없는 함수 정의이기때문에 그냥 Vice Versa님이 쓰신 방식이 더 나을지두요..)
+4. 공감합니다! 빌드봇한테 맞아가면서 완성한거긴하지만, 작더라도 하나의 시스템을 처음부터 끝까지 만들어본 느낌이라 굉장히 뿌듯하네요ㅎ
+
+
+Vice Versa
+  2 months ago
+의견 감사합니다. 사실 저는 재사용성에 대한 이유에 앞서 제가 아는 선에서 생성자를 구현한건데... 덕분에 static 메서드 내용을 다시 복습해보게 되었네요ㅎㅎ
+https://tecoble.techcourse.co.kr/post/2020-07-16-static-method/
+oakmura님 코드 보고, 위의 글 보고, 글 아래에 링크된 정적 팩터리 메서드까지 보니 (oakmura님과 비슷한 용법 같습니다) 이렇게도 해볼 수 있구나 하고 좀 더 이해할 수 있었습니다.
+덕분에 배워갑니다. (edited) 
+Tecoble
+정적 메소드, 너 써도 될까?
+static이 붙은 녀석들은 JVM이 시작될 때 Method(static) 영역에 저장된다. 그리고 프로그램이 끝날 때까지 사라지지 않고 메모리에 남아있다. (자바 기준) 이번 글에서는 그중에서도 정적 메소드(static method…
+Written by
+2기_오렌지
+Filed under
+static
+Jul 16th, 2020
+:slightly_smiling_face:
+1
+
+
+
+oakmura
+  2 months ago
+도움이 되셨다니 좋네요 ㅎㅎ
+근데 저도 과제2하다가 새싹님이 이 방법을 공유해주셔서 알게된거라서..
+@새싹
+ 저는 그럼 새싹님께 감사를 :pray:
+:+1:
+1
+:raised_hands:
+1
+

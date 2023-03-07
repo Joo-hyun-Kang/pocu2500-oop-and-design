@@ -1,0 +1,43 @@
+oakmura
+ Nov 7th, 2022 at 10:53 PM
+[2.5.4] tick()
+Planter 개체에 어떤 종류의 SmartDevice가 저장되어 있는지 모르는 상태에서, 어떻게 물 양을 조절해야 하는건가요?
+일반화된 adjustWaterLevel(Planter planter) 같은 걸 SmartDevice 클래스에 정의해두고, 그 안에서 drain() 또는 spray()를 내부적으로 호출해줘야 하는걸까요?
+조언 해주시면 감사하겠습니다 :face_with_spiral_eyes:
+3 replies
+
+
+takim
+  2 months ago
+저랑 똑같은 곳에서 고민 중이셨네요 :anguished:
+'이렇게 해도 되나' 싶게 작성 하니까 되기는 하는데 B02 테스트가 통과가 안되네요 ㅠㅠ
+아마도 원하는 방식이 있는 것 같습니다.
+저는 
+@oakmura
+ 님이 말씀 하신 방식대로 구현했습니다!
+:pray:
+1
+
+
+
+[POCU 직원] 케로
+  2 months ago
+과제 3을 생각해 보시면 비슷한 면이 있을겁니다.
+Interface마다 레지스터 함수가 있고 Planter에서 각 interface마다 리스트를 가지고 있으면 drain() 혹은 spray()를 호출하기 쉽겠죠? (edited) 
+:pray:
+1
+
+
+
+oakmura
+  2 months ago
+아하 두분 다 답변 감사합니다 :slightly_smiling_face:
+
+
+
+
+
+
+
+
+

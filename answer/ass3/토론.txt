@@ -1,0 +1,104 @@
+Qwer Asdf
+ Nov 14th at 9:06 PM
+설계할 때 고민이었던 점이 재사용성, 가독성, 성능 이 세가지를 모두 잡는 것이 힘들다는 것이 었습니다. 보통 하나를 취하면 하나를 포기해야 하더라구요.
+예를 들어, 클래스 상속을 이용해서 재사용성을 늘리면, 로직이 부모, 자식 클래스에 흩어지게 되어 가독성이 나빠지더군요.
+혹은 특정 구역의 유닛을 찾는 메서드는 재사용하기 좋지만, 아무래도 이러한 메서드는 어레이(혹은 기타 콜렉션)를 받거나 반환하도록 만들게 됩니다.
+그런데 굳이 어레이 없이 반복문으로 충분한 경우에는 이렇게 어레이를 활용하는게 낭비입니다.
+여기에 대해서 몇가지 조언이나 의견을 들어보고 싶습니다.
+9 replies
+
+
+oakmura
+  2 months ago
+정답이 정해져있는 문제가 아니라 뭔가 코맨트 달기 조심스럽네용 ㅎ..ㅎ
+이번 과제의 경우 충분히 반복되는 로직이 많았으므로 어느정도의 재사용성이 필요했다고 생각합니당
+그리고 qwer님이 말씀하신것처럼 저도 성능부분을 걱정해서 void getWeakestEnemies(arraylist) 이렇게 전달받아서, 전달받은 '참조형' 데이터인 arraylist의  값만 수정하면 새로운 콜랙션을 함수 내부에서 생성해서 반환하지 않아도 되니 성능이 개선될까 싶어서 코드를 짰었는데
+이게 동기화 문제인지 오류가 났던걸로 기억합니다 :melting_face:
+:bulb:
+1
+
+
+
+Vice Versa
+  2 months ago
+위에서 말씀하신 두가지 내용이 저에게도 중요했는데요,
+1) 특정 구역의 유닛 찾기
+2) '참조형' 데이터 즉 클래스형 (ex. 좌표) 전달하기
+1)
+저도 초기에 비슷한 생각을 하다가, 문득 SimulationVisualizer에 영감을 받아 SimulationManager에 3차원 ArrayList를 만들었습니다. (유닛이 겹쳐질 수 있는, 즉 높이가 있는 가상의 체스판이죠) 그렇게 getUnitsPosition(x,y)를 호출해서, (x,y)의 z축(유닛모임)을 가리키는 '참조형 변수'를 반환한다고 생각하니 꽤 괜찮았습니다.
+하다보니, 그 체스판 세계 안에 유닛 이동시켜줘야 하고, 전사하면 없애줘야하고 '추가적으로' 코드를 써줘야 했지만, 한 군데에서 일괄적으로 유닛 위치를 관리할 수 있어 직관적이고, 재사용이 용이하다는 장점이 있었습니다. (어차피 이중 for문 도는 건 같겠지만서도 일회용 어레이 쓰레기 더미는 줄일 수 있겠죠)
+지금와서 생각해보면 정적이어야 하는 가상의 체스판을 따로 떼어서 싱글턴으로 만들면 어떨까 했긴 합니다만, public static 메서드가 금지였던지라, 촉박한 상황에 안전하게 SimulationManager에 몰아넣었던 것 같습니다. (정적 메서드로 쓰고 싶던 compareClockwiseOrder하고 invalidPositionGenerator두요)
+2)
+'참조형'이라고 말씀하신 김에 생각난게, 저는 디버깅하면서 targetUnitOrNull 을 "attackPositionOrNull 혹은 movePositionOrNull 즉, '참조형' 데이터에 주소값만 대입하는" 얕은 복사 만 해놓고 "외않되!!!!!!" 하고 있었습니다;;; (이유 : 유닛이 이동하던 순간에 어택땅/이동 지점도 같이 이동해버려서) 그러다 저의 뻘짓을 깨닫고 new IntVector2D를 생성해서 x,y를 직접 대입한 순간이 가장 큰 충격이었고 아직도 기억에 생생합니다ㅠ
+새벽까지 불태웠지만, 결국 시간의 압박으로 저는 이번 과제에서 100점은 물건너갔습니다. 아쉬움이 남네요 좀 더 디버깅하고 완성도를 고민하고 공유와 피드백을 할 수 있었을텐데 말이죠 그래도 화이팅 해봅니다 (edited) 
+:bulb:
+5
+
+
+
+oakmura
+  2 months ago
+고생하셨습니다 :raised_hands:
+3차원 평면으로 유닛월드를 바라보는 방법도 있었군요 ㅎㅎ
+2번은 저도 디버깅하다 알게돼서, 그 후론 nextPosition이라는 변수를 들게해줬습니다 ㅋㅋ
+
+
+Qwer Asdf
+  2 months ago
+@oakmura
+ 
+@Vice Versa
+ 저도 참조형과 관련해서 버그를 겪었는데, 다들 비슷하시군요.
+자바에서는 값형 클래스가 없기 때문에 이를 보안하기 위한 몇가지 규칙을 만들어야 한다고 느꼈습니다.
+어떤 자바 코드에서는 내부 상태를 변경할 수 없는 클래스를 많이 만드는 경우도 보았는데, 이런 문제 때문이라는 것을 느꼈습니다.
+
+
+Qwer Asdf
+  2 months ago
+@Vice Versa
+ 1번에서 말씀하신 3차원 ArrayList은 ArrayList<IntVector2D, ArrayList<Unit>>인가요?
+말씀을 들어보니 HashMap<IntVector2D, ArrayList<Unit>> 이렇게 할 걸이라는 생각이 듭니다. 성능도 괜찮고 읽거나 쓰기도 괜찮은 코드가 되었을 것 같네요.
+생각해보니 ArrayList<IntVector2D, ArrayList<Unit>>는 말이 안되네요. (edited) 
+
+
+Vice Versa
+  1 month ago
+ArrayList<ArrayList<ArrayList<Unit>>> unitPositions = new ArrayList<>();
+저는 여기서부터 시작했습니다
+유닛 들어가는 z축(ArrayList<Unit>)은 사실 규모가 크지 않아 큰 영향은 없겠습니다만은, 들어가는 순서가 상관이 없어서 Set류HashSet으로 해도 괜찮을 듯 하구요,
+x, y축은 각각의 List의 '인덱스'를 활용해서 get, add, remove 하는걸 생각하니 ArrayList 해도 괜찮겠다 싶었습니다 (O(1) 이므로).
+HashMap<IntVector2D, ArrayList<Unit>>
+ㄴ 요건 생각 안해봤는데 신선하네요...ㅎ 그렇다면 key값을 어떻게 지정할지가 고민이겠는데 각각 하나의 key값으로 value인 (x, y)좌표를 꺼내시겠다면... 뭔가 조금 애매할 것 같긴 합니다 (edited) 
+
+
+oakmura
+  1 month ago
+IntVector2D의 equals() 와 hashCode() 를 오버라이딩해서 각 포지션을 key로 사용할수있습니다! 저는 각 개체에 피해를 적용할때 그런식으로 그렇게 구현했습니당
+
+
+Vice Versa
+  1 month ago
+LinkedHashmap<IntVector2D, HashSet<Unit>> unitPositions = new LinkedHashMap<>();
+// 좌표들의 순서에 따라 Link?
+생각해보니 매개변수로 IntVector2D가 들어오면 말이 되네요... Hash이니 검색속도도 O(1)로 만들 수 있겠고... Position으로 Position 찾는거라면 HashSet으로 해도 되겠군요. -> 이 부분은 제가 혼동이 있었군요. IntVector2D의 key로 Unit집합의 Value를 찾는단 말씀이시군요 생각이 꼬였었는데, 이제야 이해했습니다. 좋은 의견 감사합니다
+(추가)
+허나, 저라면 매개변수를 int x, int y로 받는 걸 택할 듯 합니다.
+getUnitsPosition 메서드와 같은 경우, 적지않게 호출해야 할 것입니다. 그런데, IntVector2D를 매개변수로 받는다고 한다면 메서드를 호출 할 때마다 힙에서 new IntVector2D를 생성해서 받아올 것이고 이는 단순히 기본자료형 int의 x, y를 받아오는 것에 비해 성능상 좋지 않을 것으로 판단됩니다 (edited) 
+:bulb:
+2
+
+white_check_mark
+eyes
+raised_hands
+
+
+
+
+
+Qwer Asdf
+  1 month ago
+@Vice Versa
+ c#에서 2차원 배열 array[x, y]는 사실 1차원 배열 array[x + maxX * y]와 다르지 않다는 것이 기억이 나네요.  이를 이용하면, ArrayList<<ArrayList<Unit>>으로도 각 좌표에 대한 유닛들을 표현할 수 있습니다.
+:+1:
+2
+

@@ -1,0 +1,302 @@
+// AuthorizationMiddleware
+package academy.pocu.comp2500.lab10;
+
+import academy.pocu.comp2500.lab10.pocuflix.ResultBase;
+import academy.pocu.comp2500.lab10.pocuflix.User;
+
+import java.util.HashSet;
+
+public class AuthorizationMiddleware implements IRequestHandler {
+    private IRequestHandler requestHandler;
+    private final HashSet<User> authorizedUsers = new HashSet<>();
+
+
+    public AuthorizationMiddleware(IRequestHandler requestHandler, HashSet<User> authorizedUsers) {
+        if (requestHandler == null) {
+            System.out.println("Warning: requestHandler cannot be null");
+
+            return;
+        }
+
+        this.requestHandler = requestHandler;
+        this.authorizedUsers.addAll(authorizedUsers);
+    }
+
+    public IRequestHandler getRequestHandler() {
+        return this.requestHandler;
+    }
+
+    public HashSet<User> getAuthorizedUsers() {
+        return this.authorizedUsers;
+    }
+
+    public ResultBase handle(Request request) {
+        if (!this.authorizedUsers.contains(request.getUser())) {
+            UnauthorizedResult unauthorizedResult = new UnauthorizedResult();
+
+            return unauthorizedResult;
+        }
+
+        return requestHandler.handle(request);
+    }
+}
+
+// CacheMiddleware.java
+package academy.pocu.comp2500.lab10;
+
+import academy.pocu.comp2500.lab10.pocuflix.Movie;
+import academy.pocu.comp2500.lab10.pocuflix.OkResult;
+import academy.pocu.comp2500.lab10.pocuflix.ResultBase;
+import academy.pocu.comp2500.lab10.pocuflix.ResultCode;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+public class CacheMiddleware implements IRequestHandler {
+    private final int maxExpirationCount;
+    private IRequestHandler requestHandler;
+    private HashMap<Request, Integer> cacheAndRemainingCountMap = new HashMap<>();
+
+    public CacheMiddleware(IRequestHandler requestHandler, int maxExpirationCount) {
+        this.maxExpirationCount = maxExpirationCount;
+        this.requestHandler = requestHandler;
+
+    }
+
+    public int getMaxExpirationCount() {
+        return this.maxExpirationCount;
+    }
+
+    public IRequestHandler getRequestHandler() {
+        return this.requestHandler;
+    }
+
+    public ResultBase handle(Request request) {
+        for (Map.Entry<Request, Integer> entry : cacheAndRemainingCountMap.entrySet()) {
+            Request requestInfo = entry.getKey();
+            int remainingCountToExpire = entry.getValue();
+            if (requestInfo.isSameRequestInfo(request)) {
+                remainingCountToExpire--;
+                if (remainingCountToExpire <= 0) {
+                    unregisterCache(requestInfo);
+
+                    break;
+                } else {
+                    entry.setValue(remainingCountToExpire);
+
+                    return new CachedResult(remainingCountToExpire);
+                }
+            }
+        }
+
+        ResultBase result = this.getRequestHandler().handle(request);
+        if (result.getCode().equals(ResultCode.OK)) {
+            registerCache(request);
+        }
+
+        return result;
+    }
+
+    private void registerCache(Request requestInfo) {
+        cacheAndRemainingCountMap.put(requestInfo, maxExpirationCount);
+    }
+
+    private void unregisterCache(Request requestInfo) {
+        cacheAndRemainingCountMap.remove(requestInfo);
+    }
+}
+
+// CachedResult.java
+package academy.pocu.comp2500.lab10;
+
+import academy.pocu.comp2500.lab10.pocuflix.ResultBase;
+import academy.pocu.comp2500.lab10.pocuflix.ResultCode;
+
+public class CachedResult extends ResultBase {
+    private int expiryCount;
+
+    public CachedResult(int expiryCount) {
+        super(ResultCode.NOT_MODIFIED);
+        this.expiryCount = expiryCount;
+
+    }
+
+    public int getExpiryCount() {
+        return this.expiryCount;
+    }
+}
+
+// MaintenanceMiddleware
+package academy.pocu.comp2500.lab10;
+
+import academy.pocu.comp2500.lab10.pocuflix.ResultBase;
+
+import java.time.OffsetDateTime;
+
+public class MaintenanceMiddleware implements IRequestHandler {
+    private IRequestHandler requestHandler;
+    private OffsetDateTime startDateTime;
+    private final int MAINTENANCE_DURATION_IN_HOUR = 1;
+
+    public MaintenanceMiddleware(IRequestHandler requestHandler, OffsetDateTime startDateTime) {
+        this.requestHandler = requestHandler;
+        this.startDateTime = startDateTime;
+    }
+
+    public IRequestHandler getRequestHandler() {
+        return this.requestHandler;
+    }
+
+    public ResultBase handle(Request request) {
+        if (isUnderMaintenance()) {
+            return new ServiceUnavailableResult(this.startDateTime, this.getEndDateTime());
+        }
+
+        return requestHandler.handle(request);
+    }
+
+    private boolean isUnderMaintenance() {
+        OffsetDateTime now = OffsetDateTime.now();
+
+        return now.isAfter(this.startDateTime) && now.isBefore(this.getEndDateTime());
+    }
+
+    public OffsetDateTime getEndDateTime() {
+        return this.startDateTime.plusHours(MAINTENANCE_DURATION_IN_HOUR);
+    }
+}
+
+// MovieStore.java
+package academy.pocu.comp2500.lab10;
+
+
+
+import java.util.ArrayList;
+import academy.pocu.comp2500.lab10.pocuflix.Movie;
+import academy.pocu.comp2500.lab10.pocuflix.NotFoundResult;
+import academy.pocu.comp2500.lab10.pocuflix.OkResult;
+import academy.pocu.comp2500.lab10.pocuflix.ResultBase;
+
+public class MovieStore implements IRequestHandler {
+    private ArrayList<Movie> movies = new ArrayList<>();
+
+    public void add(Movie movie) {
+        movies.add(movie);
+    }
+
+    public boolean remove(int index) {
+        if (index >= movies.size()) {
+            return false;
+        } else {
+            movies.remove(index);
+
+            return true;
+        }
+    }
+
+    public ResultBase handle(Request request) {
+        for (Movie m : movies) {
+            if (m.getTitle().equals(request.getMovieTitle())) {
+                return new OkResult(m);
+            }
+        }
+
+        return new NotFoundResult();
+    }
+}
+
+// ResultValidator.java
+package academy.pocu.comp2500.lab10;
+
+import academy.pocu.comp2500.lab10.pocuflix.NotFoundResult;
+import academy.pocu.comp2500.lab10.pocuflix.OkResult;
+import academy.pocu.comp2500.lab10.pocuflix.ResultBase;
+import academy.pocu.comp2500.lab10.pocuflix.ResultCode;
+
+public class ResultValidator {
+    private ResultBase resultBase;
+
+    public ResultValidator(ResultBase resultBase) {
+        this.resultBase = resultBase;
+    }
+
+    public boolean isValid(ResultCode resultCode) {
+        if (this.getResultBase() == null || resultCode == null) {
+            return false;
+        }
+
+        boolean isValidClass = false;
+        switch (resultCode) {
+            case OK:
+                isValidClass = getResultBase() instanceof OkResult;
+                break;
+            case NOT_FOUND:
+                isValidClass = getResultBase() instanceof NotFoundResult;
+                break;
+            case SERVICE_UNAVAILABLE:
+                isValidClass = getResultBase() instanceof ServiceUnavailableResult;
+                break;
+            case UNAUTHORIZED:
+                isValidClass = getResultBase() instanceof UnauthorizedResult;
+                break;
+            case NOT_MODIFIED:
+                isValidClass = getResultBase() instanceof CachedResult;
+                break;
+            default:
+                assert false : "Warning : invalid ResultBase type";
+        }
+
+        return isValidClass && getResultBase().getCode().equals(resultCode);
+    }
+
+    public ResultBase getResultBase() {
+        return this.resultBase;
+    }
+}
+
+// ServiceUnavailableResult.java
+package academy.pocu.comp2500.lab10;
+
+import academy.pocu.comp2500.lab10.pocuflix.ResultBase;
+import academy.pocu.comp2500.lab10.pocuflix.ResultCode;
+
+import java.time.OffsetDateTime;
+
+public class ServiceUnavailableResult extends ResultBase {
+    private OffsetDateTime startDateTime;
+    private OffsetDateTime endDateTime;
+
+
+    public ServiceUnavailableResult(OffsetDateTime startDateTime, OffsetDateTime endDateTime) {
+        super(ResultCode.SERVICE_UNAVAILABLE);
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+    }
+
+    public OffsetDateTime getStartDateTime() {
+        return this.startDateTime;
+    }
+
+    public OffsetDateTime getEndDateTime() {
+        return this.endDateTime;
+    }
+}
+
+// UnauthorizedResult.java
+package academy.pocu.comp2500.lab10;
+
+import academy.pocu.comp2500.lab10.pocuflix.ResultBase;
+import academy.pocu.comp2500.lab10.pocuflix.ResultCode;
+
+public class UnauthorizedResult extends ResultBase {
+
+    public UnauthorizedResult() {
+        super(ResultCode.UNAUTHORIZED);
+    }
+
+    public String getErrorMessage() {
+        return "Unauthorized access";
+    }
+
+}
